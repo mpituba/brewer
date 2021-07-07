@@ -22,6 +22,11 @@
 			
 			<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
 			
+			<!-- Loggin version -->
+			<log4j.version>2.6</log4j.version>
+			
+			<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
+			
 			<!-- Servlet API -->
 			<servlet.version>3.1.0</servlet.version>
 			
@@ -70,6 +75,14 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-webmvc</artifactId>
 				<scope>compile</scope>
+				<!-- Esta exclusão é necessária para habilitar o SLF4J -->
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+				
 			</dependency>
 			
 			<!-- Servlet API -->
@@ -101,8 +114,32 @@
 				<artifactId>thymeleaf-layout-dialect</artifactId>
 				<version>${thymeleaf-layout-dialect.version}</version>
 			</dependency>
-
 			
+			
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${jcl-over-slf4j.version}</version>
+			</dependency>
 			
 			<!-- Bean validation / Hibernate Validator -->
 			<dependency>
