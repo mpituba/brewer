@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="'layout/LayoutPadrao'">
+
+<head>
+	<!-- O css abaixo foi copiado do git do projeto, o da internet não funciona. -->
+	<link rel="stylesheet" type="text/css"	
+		th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}" />
+	
+	<title>Cadastro de usuário</title>
+
+	
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+
+
+			<div class="page-header">
+				<div class="container-fluid">
+					<h1>Cadastro de usuário</h1>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+
+				<!-- <div class="alert  alert-danger  alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<i class="fa  fa-exclamation-circle"></i> Já existe um produto com
+					o nome informado.
+				</div> -->
+				<!-- Este objeto, com esta sintaxe, permite que seja visualizado fora do formulário -->
+				<div th:each="erro : ${#fields.detailedErrors('${usuario.*}')}">
+					<span th:text="${erro.message}"></span>
+				</div>
+				<form method="POST" class="form-vertical  js-form-loading">
+					
+					<div class="row">
+						<div class="col-sm-12 form-group">
+							<label for="nome">Nome</label> <input
+								id="nome" type="text" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<label for="email">E-mail</label> <input
+								id="email" type="text" class="form-control" />
+						</div>
+						
+						<div class="col-sm-3 form-group">
+							<label for="dataNascimento">Data de nascimento</label> <input
+								id="dataNascimento" type="text" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label for="email">Senha</label> <input
+								id="email" type="text" class="form-control" />
+						</div>
+						
+						<div class="col-sm-3 form-group">
+							<label for="dataNascimento">Confirmação de senha</label> <input
+								id="dataNascimento" type="text" class="form-control" />
+						</div>
+						
+						<div class="col-sm-3 ">
+							<label >Status</label> 
+							<div>
+								<input	type="checkbox" class="js-status" data-size="small"
+											data-off-color="danger" data-on-text="Ativo"
+											data-off-text="Inativo"/>
+							</div>						
+						</div>
+						
+					</div>
+					
+					<div class="row">
+						
+						<div class="col-sm-4">
+							<label for="grupos">Grupos</label> 
+							<div>	
+								<input	id="grupos" type="checkbox" />
+								<span class="bw-checkbox-itens-space">Administrador</span>
+								<input	id="grupos" type="checkbox" />
+								<span class="bw-checkbox-itens-space">Vendedor</span>
+							</div>
+						</div>
+						
+					</div>
+					
+
+					
+
+					<br>
+					<div class="form-group">
+						<button class="btn  btn-primary" type="submit">Salvar</button>
+					</div>
+
+				</form>
+			</div>
+			
+			<!-- Fragmento do Modal CadastroRapidoEstilo.html -->
+			<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
+			
+		</section>
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
+	<script>
+		$('.js-status').bootstrapSwitch();
+	</script>
+</th:block>
+
+</body>
+</html>

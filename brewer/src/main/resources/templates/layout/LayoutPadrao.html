@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Brewer</title>
+<!-- Esta forma de link no th:ref permite mudança de contexto sem alteração do link -->
+<link rel="stylesheet" type="text/css"	th:href="@{/layout/stylesheets/vendors.min.css}" />
+<link rel="stylesheet" type="text/css"	th:href="@{/layout/stylesheets/algaworks.min.css}" />
+<link rel="stylesheet" type="text/css"	th:href="@{/layout/stylesheets/application.css}" />
+<link rel="stylesheet" type="text/css"	th:href="@{/stylesheets/brewer.css}" />
+
+<link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+
+</head>
+<body>
+	
+	<div class="aw-layout-page">
+		
+		<!-- Fragmento em BarraNavegacao.html -->
+		<div th:replace="layout/fragments/BarraNavegacao :: navbar"></div>
+
+
+		<!-- Fragmento em MenuLateral.html -->
+		<div th:replace="layout/fragments/MenuLateral :: layout-sidebar"></div>
+
+
+		<section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
+
+		
+		<!-- Fragmento em Footer.html -->
+		<div th:replace="layout/fragments/Footer :: layout-footer"></div>
+		
+	</div>	
+	
+<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+<script th:src="@{/javascripts/vendors/jquery.maskMoney.min.js}"></script>
+<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+<script th:src="@{/layout/javascripts/brewer.js}"></script>
+<!-- A Tag abaixo é usada para que ainda haja html a renderizar durante o carregamento
+		do javascript. Aqui serão declarados todos os JS deste tipo. O fragmento JS está em
+		outra página. -->
+<th:block layout:fragment="javascript-extra"></th:block>
+</body>
+</html>
