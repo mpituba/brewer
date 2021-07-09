@@ -20,7 +20,12 @@
 			
 			<maven-compiler-pluging.version>3.8.1</maven-compiler-pluging.version>
 			
+			<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
+			
 			<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
+			
+			<!-- MySQL Version -->
+			<mysql-connector-java.version>8.0.25</mysql-connector-java.version>
 			
 			<!-- Loggin version -->
 			<log4j.version>2.6</log4j.version>
@@ -53,6 +58,16 @@
 					<configuration>
 						<source>${java.version}</source>
 						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+				<!-- Plugin Flyway -->
+				<plugin>
+					<groupId>org.flywaydb</groupId>
+					<artifactId>flyway-maven-plugin</artifactId>
+					<version>${flyway-maven-plugin.version}</version>
+					<!-- Driver MYSQL para o Flyway -->
+					<configuration>
+						<driver>com.mysql.cj.jdbc.Driver</driver>
 					</configuration>
 				</plugin>
 				
@@ -167,7 +182,14 @@
 				<version>${hibernate.version}</version>
 				<scope>compile</scope>
 			</dependency>
-	
+			
+			<!-- MySQL Driver -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector-java.version}</version>
+				<scope>provided</scope>
+			</dependency>
 	
 	
 		</dependencies>
