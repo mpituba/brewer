@@ -40,20 +40,17 @@ public class CervejasController {
 	public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		
+		
 		//Verificador do BindingResult
-		if(result.hasErrors()) {
-			return novo(cerveja);
-		}
+		//if(result.hasErrors()) {
+		//	return novo(cerveja);
+		//}
 		
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
+		System.out.println(">>>>> SKU: " + cerveja.getSku());
+		System.out.println(">>>>> Sabor: " + cerveja.getSabor());
+		System.out.println(">>>>> Origem: " + cerveja.getOrigem());
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	
-	/**	
-	 * Exemplo de controller para página de protótipo
-	 * @RequestMapping("/cervejas/cadastro")
-		public String cadastro() {
-			return "cerveja/cadastro-produto";
-		}
-	**/
 }
