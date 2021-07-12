@@ -9,6 +9,9 @@
 	
 	<Loggers>
 		<Logger name="com.algaworks.brewer.controller" level="info"/>
+		
+		<!-- Mostra o log do hibernate pelo log4J2 -->
+		<Logger name="org.hibernate.SQL" level="debug"/>
 	
 		<Root level="error">
 			<AppenderRef ref="Console"/>

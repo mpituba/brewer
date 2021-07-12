@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   	
   	<modelVersion>4.0.0</modelVersion>
 
@@ -25,7 +25,7 @@
 			<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
 			
 			<!-- MySQL Version -->
-			<mysql-connector-java.version>8.0.25</mysql-connector-java.version>
+			<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
 			
 			<!-- Loggin version -->
 			<log4j.version>2.6</log4j.version>
@@ -47,6 +47,9 @@
 			<!-- JPA / Hibernate -->
 			<hibernate.version>5.1.0.Final</hibernate.version>
 			
+			<!-- Spring Data JPA -->
+			<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
+			
 		</properties>
 		
 		<build>
@@ -67,7 +70,7 @@
 					<version>${flyway-maven-plugin.version}</version>
 					<!-- Driver MYSQL para o Flyway -->
 					<configuration>
-						<driver>com.mysql.cj.jdbc.Driver</driver>
+						<driver>com.mysql.jdbc.Driver</driver>
 					</configuration>
 				</plugin>
 				
@@ -175,22 +178,31 @@
 				<scope>compile</scope>
 			</dependency>
 			
-			<!-- Hibernate - Java 8 support -->			
+			<!-- Hibernate - Java 8 support -->		
 			<dependency>
 				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-java8</artifactId>
+				<!-- artifactId>hibernate-java8</artifactId--> 
+				<artifactId>hibernate-c3p0</artifactId>
 				<version>${hibernate.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			
+			
 			
 			<!-- MySQL Driver -->
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector-java.version}</version>
-				<scope>provided</scope>
+				<scope>compile</scope>
 			</dependency>
-	
+			
+			<!-- Spring Data JPA -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${spring-data-jpa.version}</version>
+			</dependency>
 	
 		</dependencies>
 </project>

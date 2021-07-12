@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-
-
+@Entity
+@Table(name = "estilo")
 public class Estilo implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
