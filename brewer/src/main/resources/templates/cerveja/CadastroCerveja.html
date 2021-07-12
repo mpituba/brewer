@@ -31,9 +31,9 @@
 					o nome informado.
 				</div> -->
 				<!-- Este objeto, com esta sintaxe, permite que seja visualizado fora do formulário -->
-				<!-- div th:each="erro : ${#fields.detailedErrors('${cerveja.*}')}">
+				<div th:each="erro : ${#fields.detailedErrors('${cerveja.*}')}">
 					<span th:text="${erro.message}"></span>
-				</div-->
+				</div>
 				
 				<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading">
 					
