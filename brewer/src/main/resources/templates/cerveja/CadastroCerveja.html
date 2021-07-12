@@ -58,7 +58,7 @@
 						<div class="col-sm-3 form-group">
 							<label for="estilo">Estilo</label>
 								<div class="bw-field-action">
-									<select id="estilo" class="form-control">
+									<select id="estilo" class="form-control" th:field="*{estilo}">
 									 	<option value="">Selecione o estilo</option> 
 									 	<option th:each="estilo : ${estilos}" th:value="${estilo.codigo}"
 									 		th:text="${estilo.nome}">Pale Lager</option> 
