@@ -30,12 +30,16 @@
 					<i class="fa  fa-exclamation-circle"></i> Já existe um produto com
 					o nome informado.
 				</div> -->
-				<!-- Este objeto, com esta sintaxe, permite que seja visualizado fora do formulário -->
-				<div th:each="erro : ${#fields.detailedErrors('${cerveja.*}')}">
-					<span th:text="${erro.message}"></span>
-				</div>
+				
+				<!-- Mensagem Sucesso! -->
+				
+				<th:block th:include="fragments/MensagemSucesso"></th:block>
+								
 				
 				<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading">
+					
+					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+					
 					
 					<div class="row">
 						<div class="col-sm-2 form-group">
@@ -139,6 +143,6 @@
 			<!-- Fragmento do Modal CadastroRapidoEstilo.html -->
 			<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
 			
-		</section>
+	</section>
 </body>
 </html>
