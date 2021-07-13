@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.algaworks.brewer.validation.SKU;
+
 @Entity
 @Table(name = "cerveja")
 public class Cerveja {
@@ -24,6 +26,8 @@ public class Cerveja {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	//@Pattern(regexp = "([a-zA-Z]{2}\\d{4})?", message = "SKU deve seguir o padrão XX9999")
+	@SKU
 	@NotEmpty(message = "SKU é obrigatório!")
 	private String sku;
 	

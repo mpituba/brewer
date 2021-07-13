@@ -31,13 +31,13 @@
 					o nome informado.
 				</div> -->
 				
-				<!-- Mensagem Sucesso! -->
-				
+				<!-- Fragmento Mensagem Sucesso! -->
 				<th:block th:include="fragments/MensagemSucesso"></th:block>
 								
 				
 				<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading">
 					
+					<!-- Fragmento mensagem de erro! -->	
 					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 					
 					
