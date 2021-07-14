@@ -67,16 +67,14 @@ public class EstilosController {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}
 		
-		//Salva dados e verifica se já cadastrado. Se tiver exceção retorna a mensagem.
-		try {
-			//salva estilo e verifica se já está cadastrado
-			estilo = cadastroEstiloService.salvar(estilo);
-			
-		}catch(NomeEstiloJaCadastradoException e) {
-			//retorna mensagem de erro.
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
 		
+		/**
+		 * Salva dados e verifica se já cadastrado.
+		 *Se tiver exceção retorna a mensagem via ControllerAdviceHandler
+		 *que monitora os controllers para uma exceção NomeEstiloJaCadastradoException.
+		 *@mpituba 
+		**/
+		estilo = cadastroEstiloService.salvar(estilo);
 		
 		return ResponseEntity.ok(estilo);
 		
