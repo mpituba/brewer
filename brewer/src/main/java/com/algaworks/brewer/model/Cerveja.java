@@ -75,9 +75,7 @@ public class Cerveja {
 	@JoinColumn(name= "codigo_estilo")
 	private Estilo estilo;
 	
-	
-	
-	
+		
 	
 	//ToString
 	
