@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.brewer.model.Estilo;
-import com.algaworks.brewer.service.CadastroCervejaService;
 import com.algaworks.brewer.service.CadastroEstiloService;
+import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 
 @Controller
 public class EstilosController {
@@ -35,7 +35,19 @@ public class EstilosController {
 			return novo(estilo);
 		}
 		
-		cadastroEstiloService.salvar(estilo);
+		//Usa try catch pois este método pode lançar a exceção para um estilo existente
+		try {
+			
+			cadastroEstiloService.salvar(estilo);
+		
+		}catch(NomeEstiloJaCadastradoException e) {
+			
+			result.rejectValue("nome", e.getMessage(), e.getMessage());
+			return novo(estilo);
+		
+		}
+		
+		
 		attributes.addFlashAttribute("mensagem", "Estilo salvo com sucesso!");
 		return "redirect:/estilos/novo";
 	}
