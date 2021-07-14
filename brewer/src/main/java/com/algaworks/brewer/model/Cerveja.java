@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -75,7 +77,21 @@ public class Cerveja {
 	@JoinColumn(name= "codigo_estilo")
 	private Estilo estilo;
 	
-		
+	//CallBack Methods -Centraliza na classe certaas regras
+	
+	/**
+	 * CallBack JPA Methods - Centraliza na classe algumas regras
+	 * Antes de persistir e antes de fazer Update executará o método
+	 * que mudará o sku para uppercase. Há também o Postload que executa ação 
+	 * depois que busca no banco de dados.
+	 * @mpituba
+	 */
+	
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		sku = sku.toUpperCase();
+	}
 	
 	//ToString
 	
