@@ -19,7 +19,7 @@ public class CadastroEstiloService {
 	
 	//Método que salva o estilo no banco de dados
 	@Transactional
-	public void salvar(Estilo estilo) {
+	public Estilo salvar(Estilo estilo) {
 		
 		//Verifica se o estilo já existe e lança exceção para erro na tela
 		Optional<Estilo> estiloOptional = estilos.findByNomeIgnoreCase(estilo.getNome());
@@ -27,8 +27,8 @@ public class CadastroEstiloService {
 			throw new NomeEstiloJaCadastradoException("Nome do estilo já cadastrado");
 		}
 				
-		//Salva o estilo
-		estilos.save(estilo);
+		//Salva o estilo e retorna dados
+		return estilos.saveAndFlush(estilo);
 		
 	}
 	

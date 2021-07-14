@@ -3,11 +3,15 @@ package com.algaworks.brewer.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.algaworks.brewer.model.Estilo;
@@ -52,5 +56,29 @@ public class EstilosController {
 		return "redirect:/estilos/novo";
 	}
 	
+	
+	//Salvar utilizado pelo modal do cadastro rapido de estilo via estilo.cadastro-rapido.js
+	@RequestMapping(value = "/estilos", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	//@Request body transforma o corpo da requisição via js no objeto Estilo e usa validação!
+	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
+		//Verifica se há erros de validação
+		if(result.hasErrors()) {
+			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+		}
+		
+		//Salva dados e verifica se já cadastrado. Se tiver exceção retorna a mensagem.
+		try {
+			//salva estilo e verifica se já está cadastrado
+			estilo = cadastroEstiloService.salvar(estilo);
+			
+		}catch(NomeEstiloJaCadastradoException e) {
+			//retorna mensagem de erro.
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
+		
+		return ResponseEntity.ok(estilo);
+		
+	}
 	
 }
