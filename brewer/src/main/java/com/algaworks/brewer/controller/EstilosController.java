@@ -19,18 +19,19 @@ import com.algaworks.brewer.service.CadastroEstiloService;
 import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 
 @Controller
+@RequestMapping("/estilos")
 public class EstilosController {
 	
 	@Autowired
 	private CadastroEstiloService cadastroEstiloService;
 	
-	@RequestMapping("/estilos/novo")
+	@RequestMapping("/novo")
 	public String novo(Estilo estilo) {
 		return "estilo/CadastroRapidoEstilo";
 	}
 	
 	//Quando for feito um POST em cidades/novo chamará este método 
-	@RequestMapping(value = "estilos/novo", method = RequestMethod.POST)
+	@RequestMapping(value = "/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Estilo estilo, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		
@@ -58,7 +59,7 @@ public class EstilosController {
 	
 	
 	//Salvar utilizado pelo modal do cadastro rapido de estilo via estilo.cadastro-rapido.js
-	@RequestMapping(value = "/estilos", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
 	//@Request body transforma o corpo da requisição via js no objeto Estilo e usa validação!
 	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
 		//Verifica se há erros de validação
