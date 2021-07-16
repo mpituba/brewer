@@ -31,8 +31,16 @@ import com.algaworks.brewer.controller.converter.EstiloConverter;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 /**
- * Classe de configuração que ajuda o Spring a encontrar os controllers. 
- * 
+ * Classe de configuração que faz o Spring a encontrar os controllers. 
+ * É uma classe de configuração que encontra as classes por meio do  componentscan,
+ * configurado na classe. Pode-se passar o nome/local da classe como uma string
+ * mais a forma @ComponentScan(basePackageClasses = {nomedaclasse.class}) aceita 
+ * refatoração e mudança do pacote onde a classe se localiza. @EnableWwebMvc habilita o
+ * MVC a aplicação. Esta classe também permite a configuração de adaptadores para a aplic,
+ * como o WebMvcConfigurerAdapter.
+ * Quando for necessário configurar outra tecnologia deve-se alterar os métodos 
+ * abaixo: ViewResolver, TemplateEngine e ITemplateResolver para adequar a tecnologia,
+ * no caso de não se usar mais o Thymeleaf por exemplo e o jsp em seu lugar.
  * @author mpituba
  */
 @Configuration
@@ -40,13 +48,23 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 	
+	//Atributo usado pela aplicação
 	private ApplicationContext applicationContext;
 	
+	/**
+	 * Método usa do pela aplicação ao ser inicializada.
+	 * @mpituba
+	 */
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
 	}
 	
+	
+	/**
+	 * O ViewResolver processa as páginas html.
+	 * @mpituba
+	 */
 	@Bean
 	public ViewResolver viewResolver() {
 		ThymeleafViewResolver resolver = new ThymeleafViewResolver();
@@ -56,7 +74,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	}
 	
 	/**
-	 * A TemplateEngine é quem processa os arquivos HTML.
+	 * A TemplateEngine é quem processa os arquivos HTML, depende do TemplateEngine
+	 * que usa o templateRsolver. Necessita ser um Bean
 	 * @mpituba
 	 */
 	@Bean
@@ -71,13 +90,20 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		return engine;
 	}
 	
-	
+	/**
+	 * Método que resolve o template, diz aonde está o arquivo html da aplicação.
+	 * 
+	 * @mpituba
+	 */
 	private ITemplateResolver templateResolver() {
+		//Resolve templates do Spring.
 		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+		//Essencial a configuração da aplicação
 		resolver.setApplicationContext(applicationContext);
 		//Indica que a pasta será procurada em:src/main/resources/templates
 		resolver.setPrefix("classpath:/templates/");
 		resolver.setSuffix(".html");
+		//Modo do template
 		resolver.setTemplateMode(TemplateMode.HTML);
 		return resolver;
 	}
@@ -95,7 +121,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new EstiloConverter());
 		
-		//Conversor para o tipo BigDcimal informar o tipo de separação em português no js
+		//Conversor para o tipo BigDecimal informar o tipo de separação em português no js
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
 		
@@ -107,7 +133,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 	}
 	
-	//Este Bean fixa o idioma da aplicação como pt_br
+	//Este Bean fixa o idioma da aplicação como pt_br em relação sinais e pontuações numéricas 
 	@Bean
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));

@@ -10,12 +10,11 @@ import com.algaworks.brewer.config.ServiceConfig;
 import com.algaworks.brewer.config.WebConfig;
 
 /**
- * Classe utilizada como Dispatcher Controller utiliza a importação acima, bem como
- * a api servlet 3.0.1. Usada inicialmente como uma configuração do Spring por meio
- * de programação.
+ * Classe utilizada como Dispatcher Servlet ou Front Controller do Spring utiliza a
+ *  importação acima, bem como a api servlet 3.0.1. Usada inicialmente como uma configuração 
+ *  do Spring por meio de programação.
  * @author mpituba
  */
-
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
@@ -24,13 +23,21 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 		return new Class<?>[] { JPAConfig.class, ServiceConfig.class };
 	}
 
-	//Classe que ensina o Spring a achar os controllers.
+	/**
+	 * Classe do Spring MVC que indica os controllers. A classe configurada aqui no caso
+	 * o WebConfig.class ensina o Spring a achar os controllers.
+	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 		return new Class<?>[] { WebConfig.class  };
 	}
-
-	//Esta configuração indica a url ou caminho que será entregue ao DispacherServlet	
+	
+	/**
+	 * É o equivalente ao UrlMappings no web.xml.
+	 * Esta configuração indica a url ou caminho que será entregue ao DispacherServlet.
+	 * O "/" indica que da aplicação para frente entregará ao Dispatcher Servlet.	
+	 * @mpituba
+	 */
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] { "/" };

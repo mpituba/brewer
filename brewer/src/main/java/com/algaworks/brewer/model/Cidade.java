@@ -7,6 +7,8 @@ public class Cidade {
 	@NotBlank(message="A cidade deve ser preenchida!")
 	private String nome;
 
+	
+	//Getters and Setters
 	public String getNome() {
 		return nome;
 	}

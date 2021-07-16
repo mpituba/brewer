@@ -20,7 +20,7 @@ import javax.validation.constraints.Pattern;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
-//Padrão de validação
+//Padrão de validação baseado em regex
 @Pattern(regexp = "([a-zA-Z]{2}\\d{4})?")
 public @interface SKU {
 	

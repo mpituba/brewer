@@ -35,6 +35,7 @@ public class CervejasController {
 		mv.addObject("sabores", Sabor.values());
 		mv.addObject("estilos", estilos.findAll());
 		mv.addObject("origens", Origem.values());
+		
 		return mv;
 	}
 	
@@ -50,6 +51,8 @@ public class CervejasController {
 		
 		cadastroCervejaService.salvar(cerveja);
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
+		
+		// Neste ponto o Controller devolve o nome da View. @mpituba
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	

@@ -117,7 +117,9 @@
 				<scope>provided</scope>
 			</dependency>
 			
-			<!-- Thymeleaf -->
+			<!-- Thymeleaf -Esta classe faz parte da configuração do View Resolver do
+			Spring que diz ao Dispatcher Servlet qual página ou view deve ser retornada
+			e ser redenrizada de volta ao browse/usuário requisitante. -->
 			<dependency>
 				<groupId>org.thymeleaf</groupId>
 				<artifactId>thymeleaf</artifactId>

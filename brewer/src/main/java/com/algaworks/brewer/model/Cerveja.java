@@ -77,16 +77,16 @@ public class Cerveja {
 	@JoinColumn(name= "codigo_estilo")
 	private Estilo estilo;
 	
-	//CallBack Methods -Centraliza na classe certaas regras
 	
+	//Callbacks JPA
 	/**
 	 * CallBack JPA Methods - Centraliza na classe algumas regras
 	 * Antes de persistir e antes de fazer Update executará o método
 	 * que mudará o sku para uppercase. Há também o Postload que executa ação 
-	 * depois que busca no banco de dados.
+	 * depois que busca no banco de dados.Prepersist é usado antes de persistir 
+	 * e PreUpdate antes de ser atualizado.
 	 * @mpituba
 	 */
-	
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
@@ -97,8 +97,11 @@ public class Cerveja {
 	
 	@Override
 	public String toString() {
-		return "Cerveja [sku=" + sku + ", nome=" + nome + ", descricao=" + descricao + "]";
+		return "Cerveja [codigo=" + codigo + ", sku=" + sku + ", nome=" + nome + ", descricao=" + descricao + ", valor="
+				+ valor + ", teorAlcoolico=" + teorAlcoolico + ", comissao=" + comissao + ", quantidadeEstoque="
+				+ quantidadeEstoque + ", origem=" + origem + ", sabor=" + sabor + ", estilo=" + estilo + "]";
 	}
+
 
 	//Getters and Setters
 	
@@ -107,6 +110,9 @@ public class Cerveja {
 	}
 
 
+	
+
+	
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
