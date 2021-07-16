@@ -27,6 +27,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.algaworks.brewer.controller.CervejasController;
 import com.algaworks.brewer.controller.converter.EstiloConverter;
+import com.algaworks.brewer.thymeleaf.BrewerDialect;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -84,8 +85,15 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		engine.setEnableSpringELCompiler(true);
 		engine.setTemplateResolver(templateResolver());
 		
-		//Inserção do Layout Dialect do Thymeleaf
+		//Layout Dialect do Thymeleaf
 		engine.addDialect(new LayoutDialect());
+		
+		/**
+		 * Layout customizado Brewer para simplificar expressões grande ou
+		 * mesmo criarmos as nossas e diminuir código no Thymeleaf. A documentação
+		 * está em www.thymeleaf.org/documentation.html  #Extending Thymeleaf.
+		 */
+		engine.addDialect(new BrewerDialect());
 		
 		return engine;
 	}
