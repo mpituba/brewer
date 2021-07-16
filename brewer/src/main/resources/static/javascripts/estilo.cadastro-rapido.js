@@ -1,3 +1,4 @@
+//Programa modularizado.
 $(function() {
 	
 	var modal = $('#modalCadastroRapidoEstilo');
@@ -51,5 +52,6 @@ $(function() {
 		modal.modal('hide');
 	}
 	
+
 
 });
