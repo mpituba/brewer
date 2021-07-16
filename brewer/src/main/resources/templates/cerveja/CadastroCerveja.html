@@ -32,14 +32,12 @@
 					o nome informado.
 				</div> -->
 				
-				<!-- Fragmento Mensagem Sucesso! -->
-				<th:block th:include="fragments/MensagemSucesso"></th:block>
 								
 				
 				<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading">
+					<!-- Código Thymeleaf customizado das validações e mensagens de sucesso. -->
+					<brewer:message/>
 					
-					<!-- Fragmento mensagem de erro! -->	
-					<th:block th:include="fragments/MensagensErroValidacao"></th:block>
 					
 					
 					<div class="row">
