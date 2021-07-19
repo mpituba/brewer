@@ -36,10 +36,10 @@ public class MessageElementTagProcessor extends AbstractElementTagProcessor{
 		 * @mpituba
 		 */
 		model.add(modelFactory.createStandaloneElementTag("th:block",
-				"th:include", "fragments/MensagemSucesso"));
+				"th:replace", "fragments/MensagemSucesso :: alert"));
 		
 		model.add(modelFactory.createStandaloneElementTag("th:block",
-				"th:include", "fragments/MensagensErroValidacao"));
+				"th:replace", "fragments/MensagensErroValidacao :: alert"));
 		
 		/**Visto o código Thymeleaf precisar ser executado passa-se true
 		*se fosse um código html false.
