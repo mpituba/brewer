@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.algaworks.brewer.dto.FotoDTO;
 import com.algaworks.brewer.storage.FotoStorageRunnable;
 
 @RestController
@@ -14,11 +15,11 @@ import com.algaworks.brewer.storage.FotoStorageRunnable;
 public class FotosController {
 	
 	@PostMapping
-	public DeferredResult<String> upload(@RequestParam("files[]") MultipartFile[] files) {
+	public DeferredResult<FotoDTO> upload(@RequestParam("files[]") MultipartFile[] files) {
 		/** Classe usada para aumentar a disponibilidade da aplicação
 		 * faz uma chamada assincrona. @mpituba
 		 */
-		DeferredResult<String> resultado = new DeferredResult<>();
+		DeferredResult<FotoDTO> resultado = new DeferredResult<>();
 		
 		Thread thread = new Thread(new FotoStorageRunnable(files, resultado));
 		thread.start();
