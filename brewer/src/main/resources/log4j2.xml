@@ -8,7 +8,7 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.algaworks.brewer.controller" level="info"/>
+		<Logger name="com.algaworks.brewer" level="debug"/>
 		
 		<!-- Mostra o log do hibernate pelo log4J2 -->
 		<Logger name="org.hibernate.SQL" level="debug"/>
