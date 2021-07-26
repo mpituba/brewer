@@ -27,7 +27,7 @@ public class EstilosController {
 	
 	@RequestMapping("/novo")
 	public String novo(Estilo estilo) {
-		return "estilo/CadastroRapidoEstilo";
+		return "estilo/CadastroEstilo";
 	}
 	
 	//Quando for feito um POST em cidades/novo chamará este método 
@@ -58,11 +58,11 @@ public class EstilosController {
 	}
 	
 	
-	//Salvar utilizado pelo modal do cadastro rapido de estilo via estilo.cadastro-rapido.js
+	//1. Salvar utilizado pelo modal do cadastro rapido de estilo via estilo.cadastro-rapido.js
+	//2. @Request body transforma o corpo da requisição via js no objeto Estilo e usa validação!
+	//3 .Verifica se há erros de validação
 	@RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-	//@Request body transforma o corpo da requisição via js no objeto Estilo e usa validação!
-	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
-		//Verifica se há erros de validação
+		public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
 		if(result.hasErrors()) {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}

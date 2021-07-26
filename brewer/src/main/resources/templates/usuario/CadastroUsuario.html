@@ -2,7 +2,8 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="'layout/LayoutPadrao'">
+	layout:decorator="'layout/LayoutPadrao'"
+	xmlns:brewer="http://brewer.algaworks.com">
 
 <head>
 	<!-- O css abaixo foi copiado do git do projeto, o da internet não funciona. -->
@@ -36,26 +37,27 @@
 					o nome informado.
 				</div> -->
 				<!-- Este objeto, com esta sintaxe, permite que seja visualizado fora do formulário -->
-				<div th:each="erro : ${#fields.detailedErrors('${usuario.*}')}">
-					<span th:text="${erro.message}"></span>
-				</div>
-				<form method="POST" class="form-vertical  js-form-loading">
+				
+				<form method="POST" th:object="${usuario}" class="form-vertical  js-form-loading">
+					
+					<!-- Código Thymeleaf customizado das validações e mensagens de sucesso. -->
+					<brewer:message/>
 					
 					<div class="row">
-						<div class="col-sm-12 form-group">
-							<label for="nome">Nome</label> <input
+						<div class="col-sm-12 form-group bw-required">
+							<label for="nome" class="control-label">Nome</label> <input
 								id="nome" type="text" class="form-control" />
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class="col-sm-6 form-group">
-							<label for="email">E-mail</label> <input
+						<div class="col-sm-6 form-group bw-required">
+							<label for="email" class="control-label">E-mail</label> <input
 								id="email" type="text" class="form-control" />
 						</div>
 						
-						<div class="col-sm-3 form-group">
-							<label for="dataNascimento">Data de nascimento</label> <input
+						<div class="col-sm-3 form-group bw-required">
+							<label for="dataNascimento" class="control-label">Data de nascimento</label> <input
 								id="dataNascimento" type="text" class="form-control" />
 						</div>
 					</div>
