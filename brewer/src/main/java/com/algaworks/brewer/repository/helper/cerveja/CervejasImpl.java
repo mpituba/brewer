@@ -68,11 +68,7 @@ public class CervejasImpl implements CervejasQueries{
 		return criteria.list();
 	}
 	
-	@Override
-	public List<Cerveja> filtrar(CervejaFilter filtro) {
 
-		return null;
-	}
 	
 	private boolean isEstiloPresente(CervejaFilter filtro) {
 		return filtro.getEstilo() != null && filtro.getEstilo().getCodigo() != null;
