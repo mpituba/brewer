@@ -79,6 +79,7 @@ public class CervejasController {
 		//System.out.println(">>>>> PageNumber : " + pageable.getPageNumber());
 		//System.out.println(">>>>> PageSize   : " + pageable.getPageSize());
 		
+				
 		PageWrapper <Cerveja> paginaWrapper = new PageWrapper<> (cervejas.filtrar(cervejaFilter, pageable),
 				httpServletRequest);
 		
