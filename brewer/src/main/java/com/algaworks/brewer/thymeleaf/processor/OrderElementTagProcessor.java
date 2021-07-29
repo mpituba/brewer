@@ -10,8 +10,7 @@ import org.thymeleaf.processor.element.IElementTagStructureHandler;
 import org.thymeleaf.templatemode.TemplateMode;
 
 /**
- * Classe para a criação de um novo elemento do Thymeleaf.
- * 
+ * Classe para a criação de um novo elemento do Thymeleaf. brewer:order
  * @author mpituba
  */
 
@@ -33,24 +32,23 @@ public class OrderElementTagProcessor extends AbstractElementTagProcessor{
 		IModelFactory modelFactory = context.getModelFactory();
 		IModel model = modelFactory.createModel();
 		
-		//Recebe os argumentos
+		//Recebe os argumentos procedentes da tag
 		IAttribute page = tag.getAttribute("page");
 		IAttribute field = tag.getAttribute("field");
 		IAttribute text = tag.getAttribute("text");
 		
-		/**Passa o nome da TAG, o nome do atributo e o valor do atributo,
-		 * os dois model abaixo criam os cógigos que chamam os fragmentos
-		 * para as mensagens de sucesso e de erros de validação.
-		 * @mpituba
+		/**
+		 * Recebe os parâmetros page, field e text. O model abaixo cria o cógigo
+		 *  que chama o fragmento para a ordenação ascendente e descendente. @mpituba
 		 */
 		model.add(modelFactory.createStandaloneElementTag("th:block","th:replace",
 						String.format("fragments/Ordenacao :: order (%s, %s, %s)",
 						page.getValue(), field.getValue(), text.getValue())));
 		
 		
-		/**Visto o código Thymeleaf precisar ser executado passa-se true
-		*se fosse um código html false.
-		*@mpituba
+		/**
+		 * Visto o código Thymeleaf precisar ser executado, passa-se true;
+		*  se fosse um código html, false. @mpituba
 		*/
 		structureHandler.replaceWith(model, true);
 		

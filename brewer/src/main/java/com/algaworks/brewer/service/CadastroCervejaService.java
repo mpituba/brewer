@@ -9,6 +9,11 @@ import com.algaworks.brewer.model.Cerveja;
 import com.algaworks.brewer.repository.Cervejas;
 import com.algaworks.brewer.service.event.cerveja.CervejaSalvaEvent;
 
+/**
+ * Serviço utilizado para salvar transacionalmente uma cerveja e
+ * publicar o evento CervejaSalvaEvent. @author mpituba
+ */
+
 @Service
 public class CadastroCervejaService {
 	
@@ -16,9 +21,11 @@ public class CadastroCervejaService {
 	@Autowired
 	private Cervejas cervejas;
 	
+	//Publicador de evento, que publicará o evento CervejaSalvaEvent
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	
+	//Salva a transação da cerveja e publica o evento CervejaSalvaEvent.
 	@Transactional
 	public void salvar(Cerveja cerveja) {
 		cervejas.save(cerveja);

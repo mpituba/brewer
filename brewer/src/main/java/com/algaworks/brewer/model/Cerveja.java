@@ -237,6 +237,7 @@ public class Cerveja {
 		this.contentType = contentType;
 	}
 	
+	//Método que retorna Mock da cerveja caso não exista foto.	
 	public String getFotoOuMock() {
 		return !StringUtils.isEmpty(foto) ? foto : "cerveja-mock.png";		
 	} 

@@ -68,6 +68,18 @@ public class CervejasController {
 		return new ModelAndView("redirect:/cervejas/novo");
 	}
 	
+	/**
+	 * Controlador de PesquisasCervejas
+	 * @param cervejaFilter - Modelo do Filtro passado para a pesquisa da página.
+	 * @param result - Binding das validações. 
+	 * @param pageable - Objeto responsável pela paginação da página de pesquisa.
+	 * @param httpServletRequest  - Objeto Servlet.
+	 * @PageableDefault(size = 2) - Parâmetro responsável pelo número de registros
+	 * por página, aqui são dois registros por página.
+	 * PageWrapper - Envelopador do filtro de cerveja e seus parâmetros.
+	 * @author mpituba
+	 */
+	
 	@GetMapping
 	public ModelAndView pesquisar(CervejaFilter cervejaFilter, BindingResult result, 
 			@PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest ) {
@@ -79,7 +91,7 @@ public class CervejasController {
 		//System.out.println(">>>>> PageNumber : " + pageable.getPageNumber());
 		//System.out.println(">>>>> PageSize   : " + pageable.getPageSize());
 		
-				
+		//Instanciado o PageWrapper		
 		PageWrapper <Cerveja> paginaWrapper = new PageWrapper<> (cervejas.filtrar(cervejaFilter, pageable),
 				httpServletRequest);
 		

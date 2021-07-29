@@ -1,26 +1,37 @@
 package com.algaworks.brewer.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.algaworks.brewer.controller.page.PageWrapper;
 import com.algaworks.brewer.model.Estilo;
+import com.algaworks.brewer.repository.Estilos;
+import com.algaworks.brewer.repository.filter.EstiloFilter;
 import com.algaworks.brewer.service.CadastroEstiloService;
 import com.algaworks.brewer.service.exception.NomeEstiloJaCadastradoException;
 
 @Controller
 @RequestMapping("/estilos")
 public class EstilosController {
+	
+	@Autowired
+	private Estilos estilos;
 	
 	@Autowired
 	private CadastroEstiloService cadastroEstiloService;
@@ -78,6 +89,34 @@ public class EstilosController {
 		
 		return ResponseEntity.ok(estilo);
 		
+	}
+	
+	/**
+	 * Controlador de PesquisaEstiloss
+	 * @param cervejaFilter - Modelo do Filtro passado para a pesquisa da página.
+	 * @param result - Binding das validações. 
+	 * @param pageable - Objeto responsável pela paginação da página de pesquisa.
+	 * @param httpServletRequest  - Objeto Servlet.
+	 * @PageableDefault(size = 2) - Parâmetro responsável pelo número de registros
+	 * por página, aqui são dois registros por página.
+	 * PageWrapper - Envelopador do filtro de cerveja e seus parâmetros.
+	 * @author mpituba
+	 */
+	
+	@GetMapping
+	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult result, 
+			@PageableDefault(size = 5) Pageable pageable, HttpServletRequest httpServletRequest ) {
+		ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
+		
+		//System.out.println(">>>>> PageNumber : " + pageable.getPageNumber());
+		//System.out.println(">>>>> PageSize   : " + pageable.getPageSize());
+		
+		//Instanciado o PageWrapper		
+		PageWrapper <Estilo> paginaWrapper = new PageWrapper<> (estilos.filtrar(estiloFilter, pageable),
+				httpServletRequest);
+		
+		mv.addObject("pagina", paginaWrapper);
+		return mv;
 	}
 	
 }

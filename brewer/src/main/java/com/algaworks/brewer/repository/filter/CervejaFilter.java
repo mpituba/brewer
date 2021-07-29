@@ -6,6 +6,10 @@ import com.algaworks.brewer.model.Estilo;
 import com.algaworks.brewer.model.Origem;
 import com.algaworks.brewer.model.Sabor;
 
+/**
+ * Objeto Filtro passado para fazer a pesquisa de cerveja, São os valores
+ * dos fitros da página de busca. @author mpituba
+ */
 public class CervejaFilter {
 
 	private String sku;
