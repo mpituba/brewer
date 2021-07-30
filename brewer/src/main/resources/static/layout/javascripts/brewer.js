@@ -42,12 +42,37 @@ Brewer.MaskPhoneNumber = (function() {
 	
 }());
 
+//Função para a máscara do CEP
+Brewer.MaskCep = (function() {
+	
+	
+	function MaskCep() {
+		this.inputCep = $('.js-cep');
+	}
+	
+	MaskCep.prototype.enable = function() {
+		this.inputCep.mask('00.000-000');
+	}
+	
+	return MaskCep;
+	
+	
+}());
+
 
 $(function(){
+	//Chama a função de máscara para moeda
 	var maskMoney = new Brewer.MaskMoney();
 	maskMoney.enable();
 	
+	//Chama a função de Máscara do telefone
 	var maskPhoneNumber = new Brewer.MaskPhoneNumber();
 	maskPhoneNumber.enable();
+	
+	//Chama a função de máscara para CEP
+	var maskCep = new Brewer.MaskCep();
+	maskCep.enable();
+	
+	
 	
 });
