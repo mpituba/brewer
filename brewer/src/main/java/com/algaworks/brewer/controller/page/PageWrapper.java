@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
@@ -26,8 +25,15 @@ public class PageWrapper<T> {
 	public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest){
 		//Recebe a página genérica
 		this.page = page;
+		
 		//Inicialização do UriBuilder, é feita por meio da requisição httpServlet
-		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);
+		//Este código comentado tem um bug, resolvido nas quatro linhas abaixo
+//		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);
+		String httpUrl = httpServletRequest.getRequestURL().append(httpServletRequest
+			.getQueryString() != null ? "?" + httpServletRequest.getQueryString(): "")
+			.toString().replaceAll("\\+","%20");
+		this.uriBuilder = UriComponentsBuilder.fromHttpUrl(httpUrl);
+		
 	}
 	
 	/**
