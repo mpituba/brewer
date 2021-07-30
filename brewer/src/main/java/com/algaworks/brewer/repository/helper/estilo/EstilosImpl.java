@@ -9,6 +9,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +19,17 @@ import org.springframework.util.StringUtils;
 
 import com.algaworks.brewer.model.Estilo;
 import com.algaworks.brewer.repository.filter.EstiloFilter;
+import com.algaworks.brewer.repository.paginacao.PaginacaoUtil;
 
 public class EstilosImpl implements EstilosQueries{
 	
 	//Injeção do EntityManager
 	@PersistenceContext
 	private EntityManager manager;
+	
+	//Bean da paginação, criado para evitar duplicação de código
+	@Autowired 
+	private PaginacaoUtil paginacaoUtil;
 		
 	@SuppressWarnings("unchecked")
 	@Override
@@ -32,26 +38,8 @@ public class EstilosImpl implements EstilosQueries{
 		//Criteria do Hibernate
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Estilo.class);
 		
-		//Variáveis com valores de referência para a paginação
-		int paginaAtual = pageable.getPageNumber();
-		int totalRegistrosPorPagina = pageable.getPageSize();
-		int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
-		
-		//Referência para o primeiro registro da página gerada
-		criteria.setFirstResult(primeiroRegistro);
-		//Quantidade de registros da página gerada
-		criteria.setMaxResults(totalRegistrosPorPagina);
-		
-		//Objeto que recebe a ordenação vinda da página quando é solicitada no GET
-		Sort sort = pageable.getSort();
-		//System.out.println(">>>>> Sort: " + sort);
-		
-		if (sort != null) {
-			//Itera todos os parâmetros de ordenação, aqui utiliza um parâmetro
-			Sort.Order order = sort.iterator().next();
-			String propertie = order.getProperty();
-			criteria.addOrder(order.isAscending() ? Order.asc(propertie) : Order.desc(propertie));
-		}
+		//Chamada ao Bean da Paginação
+		paginacaoUtil.preparar(criteria, pageable);
 		
 		adicionarFiltro(filtro, criteria);
 		//Ao usar Criteria resolve-se o problema n + 1 das consultas SQL.
