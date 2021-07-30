@@ -41,6 +41,9 @@
 			<!-- Thymeleaf - Layout Dialect - Configura o layout hierarquico -->
 			<thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
 			
+			<!-- Thymeleaf Extras Data Attribute -->
+			<thymeleaf-extras-data-attribute.version>2.0.1</thymeleaf-extras-data-attribute.version>
+			
 			<!-- Bean validation / Hibernate /Validator -->
 			<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
 			
@@ -143,6 +146,14 @@
 				<groupId>nz.net.ultraq.thymeleaf</groupId>
 				<artifactId>thymeleaf-layout-dialect</artifactId>
 				<version>${thymeleaf-layout-dialect.version}</version>
+			</dependency>
+			
+			<!-- Thymeleaf Extras Data Attribute -->
+			<dependency>
+				<groupId>com.github.mxab.thymeleaf.extras</groupId>
+				<artifactId>thymeleaf-extras-data-attribute</artifactId>
+				<version>${thymeleaf-extras-data-attribute.version}</version>
+				<scope>compile</scope>
 			</dependency>
 			
 			
