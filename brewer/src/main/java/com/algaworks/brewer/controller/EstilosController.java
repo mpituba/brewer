@@ -92,7 +92,7 @@ public class EstilosController {
 	}
 	
 	/**
-	 * Controlador de PesquisaEstiloss
+	 * Controlador de PesquisaEstilos
 	 * @param cervejaFilter - Modelo do Filtro passado para a pesquisa da página.
 	 * @param result - Binding das validações. 
 	 * @param pageable - Objeto responsável pela paginação da página de pesquisa.

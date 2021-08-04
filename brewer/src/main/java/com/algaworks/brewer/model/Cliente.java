@@ -1,8 +1,24 @@
 package com.algaworks.brewer.model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 
+//@Entity
+//@Table(name = "cliente")
 public class Cliente {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long codigo;
 
 	@NotBlank(message="O nome deve ser preenchido!")
 	private String nome;
@@ -27,6 +43,21 @@ public class Cliente {
 	
 	@NotBlank(message="O CEP deve ser preenchido!")
 	private String cep;
+	
+	@NotNull(message = "O estado é obrigatório!")
+	//@ManyToOne
+	//@JoinColumn(name= "codigo_estado")
+	private Estado estado;
+
+	
+	
+	public Long getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNome() {
 		return nome;
@@ -90,7 +121,18 @@ public class Cliente {
 
 	public void setCep(String cep) {
 		this.cep = cep;
-	}	
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	
+	
 	
 	
 }
