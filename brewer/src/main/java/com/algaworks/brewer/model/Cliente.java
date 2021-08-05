@@ -2,51 +2,45 @@ package com.algaworks.brewer.model;
 
 
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-//@Entity
-//@Table(name = "cliente")
-public class Cliente {
+@Entity
+@Table(name = "cliente")
+public class Cliente implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@NotBlank(message="O nome deve ser preenchido!")
+	
 	private String nome;
 	
-	@NotBlank(message="O CPF/CNPJ deve ser preenchido!")
-	private String cpfCnpj;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_pessoa")
+	private TipoPessoa tipoPessoa;
 	
-	@NotBlank(message="O telefone deve ser preenchido!")
+	@Column(name = "cpf_cnpj")
+	private String cpfOuCnpj;
 	private String telefone;
-	
-	@NotBlank(message="O e-mail deve ser preenchido!")
 	private String email;
 	
-	@NotBlank(message="O logradouro deve ser preenchido!")
-	private String logradouro;
-	
-	@NotBlank(message="O número deve ser preenchido!")
-	private String numero;
-	
-	@NotBlank(message="O complemento deve ser preenchido!")
-	private String complemento;
-	
-	@NotBlank(message="O CEP deve ser preenchido!")
-	private String cep;
-	
-	@NotNull(message = "O estado é obrigatório!")
-	//@ManyToOne
-	//@JoinColumn(name= "codigo_estado")
-	private Estado estado;
+	@Embedded
+	private Endereco endereco;
 
-	
+	//Getters and Setters
 	
 	public Long getCodigo() {
 		return codigo;
@@ -64,12 +58,20 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getCpfCnpj() {
-		return cpfCnpj;
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
 	}
 
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
+	}
+
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public String getTelefone() {
@@ -88,46 +90,38 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
-	public String getNumero() {
-		return numero;
+	//Equal and HashCode
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(codigo, other.codigo);
 	}
 
-	public String getComplemento() {
-		return complemento;
-	}
+	
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+	
 
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public Estado getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
+	
 	
 	
 	
