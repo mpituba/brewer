@@ -27,6 +27,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.algaworks.brewer.controller.CervejasController;
+import com.algaworks.brewer.controller.converter.CidadeConverter;
+import com.algaworks.brewer.controller.converter.EstadoConverter;
 import com.algaworks.brewer.controller.converter.EstiloConverter;
 import com.algaworks.brewer.thymeleaf.BrewerDialect;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
@@ -38,8 +40,8 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  * É uma classe de configuração que encontra as classes por meio do  componentscan,
  * configurado na classe. Pode-se passar o nome/local da classe como uma string
  * mais a forma @ComponentScan(basePackageClasses = {nomedaclasse.class}) aceita 
- * refatoração e mudança do pacote onde a classe se localiza. @EnableWwebMvc habilita o
- * MVC a aplicação. Esta classe também permite a configuração de adaptadores para a aplic,
+ * refatoração e mudança do pacote onde a classe se localiza. @EnableWebMvc habilita o
+ * MVC a aplicação. Esta classe também permite a configuração de adaptadores para a aplição,
  * como o WebMvcConfigurerAdapter.
  * Quando for necessário configurar outra tecnologia deve-se alterar os métodos 
  * abaixo: ViewResolver, TemplateEngine e ITemplateResolver para adequar a tecnologia,
@@ -136,6 +138,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public FormattingConversionService mvcConversionService () {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new EstiloConverter());
+		//Conversor para o campo cidade em CadastroCliente
+		conversionService.addConverter(new CidadeConverter());
+		//Conversor para o campo estado
+		conversionService.addConverter(new EstadoConverter());
 		
 		//Conversor para o tipo BigDecimal informar o tipo de separação em português no js
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
