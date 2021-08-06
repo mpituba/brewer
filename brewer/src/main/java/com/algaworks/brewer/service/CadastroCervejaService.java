@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.algaworks.brewer.model.Cerveja;
+import com.algaworks.brewer.model.Cliente;
 import com.algaworks.brewer.repository.Cervejas;
 import com.algaworks.brewer.service.event.cerveja.CervejaSalvaEvent;
 
@@ -29,8 +30,7 @@ public class CadastroCervejaService {
 	@Transactional
 	public void salvar(Cerveja cerveja) {
 		cervejas.save(cerveja);
-	
-		publisher.publishEvent(new CervejaSalvaEvent(cerveja));
+			
 	}
 		
 }

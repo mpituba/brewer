@@ -13,6 +13,7 @@ public enum TipoPessoa {
 	private String documento;
 	private String mascara;
 	private Class<?> grupo;
+		
 	
 	//Construtor
 	TipoPessoa(String descricao, String documento, String mascara, Class<?> grupo) {
@@ -22,6 +23,11 @@ public enum TipoPessoa {
 		this.grupo = grupo;
 	}
 
+	
+	//Método remove Formatação do CPF/CNPJ antes de salvar no banco
+	public static String removerFormatacao(String cpfOuCnpj) {
+		return cpfOuCnpj.replaceAll("\\.|-|/", "");
+	}
 	
 	
 	//Getters do Enum
