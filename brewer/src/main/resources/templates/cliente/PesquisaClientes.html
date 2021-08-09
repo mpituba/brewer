@@ -40,12 +40,12 @@
 								
 				<div class="col-sm-6 form-group">
 					<label for="nome" class="control-label">Nome</label>
-					<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
+					<input id="nome" type="text" class="form-control" th:field="*{nome}" autofocus="autofocus"/>
 				</div>
 				
 				<div class="col-sm-6 form-group" >
 					<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label>
-					 <input	id="cpfOuCnpj" type="text" class="form-control" autofocus="autofocus" th:field="*{cpfOuCnpj}"/>
+					 <input	id="cpfOuCnpj" type="text" class="form-control" th:field="*{cpfOuCnpj}"/>
 				</div>
 				
 			</div>	
@@ -61,42 +61,38 @@
 				<thead>
 					<tr>
 						
-						
-						
-						<th class="table-cervejas-col-nome">
+						<th class="table-clientes-col-nome">
 							<!-- th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'nome', 'Nome')"></th:block-->
 							<brewer:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 						
-						<th class="table-cervejas-col-tipoPessoa">
+						<th class="table-clientes-col-tipoPessoa">
 							<!-- th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'tipoPessoa', 'Tipo Pessoa')"></th:block-->
 							<brewer:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa"/>
 						</th>
 						
-						<th class="table-cervejas-col-cpfOuCnpj">
-							<!--th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'cpfOuCnpj', 'CPF/CNPJ')"></th:block-->
-							<brewer:order page="${pagina}" field="cpfOuCnpj" text="CPF/CNPJ"/>
-						</th>
+						<th class="table-clientes-col-cpf-cnpj">CPF/CNPJ</th>
 						
-						<th class="table-cervejas-col-telefone">
-							<!--th:block th:replace="fragments/Ordenacao :: order (${pagina}, 'telefone', 'Telefone')"></th:block-->
-							<brewer:order page="${pagina}" field="telefone" text="Telefone"/>
-						</th>
+						<th class="table-clientes-col-telefone">Telefone</th>
 						
-						<th class="table-cervejas-col-acoes"></th>
+						<th class="table-clientes-col-cidade-estado">Cidade/Estado</th>
+						
+						<th class="table-clientes-col-acoes">Ações</th>
 					</tr>
 				</thead>
 				
 				<tbody>
 					<tr th:each="cliente : ${pagina.conteudo}">
 						
-						<td class="text-center" th:text="${cliente.nome}">Cliente A</td>
+						<td class="text-left" th:text="${cliente.nome}">Cliente A</td>
 						
-						<td th:text="${cliente.tipoPessoa}">Física</td>
+						<td class="text-left" th:text="${cliente.tipoPessoa.descricao}">Física</td>
 						
-						<td th:text="${cliente.cpfOuCnpj}">265.626.790-01</td>
+						<td class="text-left" th:text="${cliente.cpfOuCnpj}">265.626.790-01</td>
 						
-						<td th:text="${cliente.telefone}">(21) 99999-9999</td>
+						<td class="text-left" th:text="${cliente.telefone}">Telefone</td>
+						
+						<td class="text-left" th:text="${cliente.endereco.nomeCidadeSiglaEstado}">Cidade/Estado</td>
 						
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" title="Editar">
@@ -106,13 +102,13 @@
 							<a class="btn btn-link btn-xs" title="Excluir">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
-						<td>
+						</td>
 						
 						
 					</tr>
 									
 					<tr th:if="${pagina.vazia}">
-						<td colspan="7">Nenhuma cerveja encontrada</td>
+						<td colspan="7">Nenhuma clientes encontrado</td>
 					</tr>
 
 				</tbody>

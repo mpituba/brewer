@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,8 +47,7 @@ public class ClientesController {
 	
 	//Quando for feito um POST em clientes/novo chamará este método 
 	@PostMapping(value = "/novo")
-	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, Model model,
-			RedirectAttributes attributes) {
+	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
 		
 		//Verificador do BindingResult
 		if(result.hasErrors()) {
@@ -85,17 +83,11 @@ public class ClientesController {
 	public ModelAndView pesquisar(ClienteFilter clienteFilter, BindingResult result, 
 			@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest ) {
 		ModelAndView mv = new ModelAndView("cliente/PesquisaClientes");
-		mv.addObject("clientes", clientes.findAll());
-		
-		
-		
+		mv.addObject("tiposPessoa", TipoPessoa.values());
 		
 		//Instanciado o PageWrapper		
 		PageWrapper <Cliente> paginaWrapper = new PageWrapper<> (clientes.filtrar(clienteFilter, pageable),
 				httpServletRequest);
-		
-		
-		
 		
 		mv.addObject("pagina", paginaWrapper);
 		return mv;

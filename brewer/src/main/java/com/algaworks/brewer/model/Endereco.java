@@ -24,6 +24,15 @@ public class Endereco  implements Serializable{
 	@Transient
 	private Estado estado;
 	
+	//Método pega campos null do banco e retorna valor vazio
+	public String getNomeCidadeSiglaEstado() {
+		if(this.cidade != null) {
+			return this.cidade.getNome() + "/" + this.cidade.getEstado().getSigla();
+		}
+		
+		return null;
+	}
+	
 	//Getters and Setters
 	public String getLogradouro() {
 		return logradouro;

@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -43,6 +44,15 @@ public class ClientesImpl implements ClientesQueries{
 		paginacaoUtil.preparar(criteria, pageable);
 		
 		adicionarFiltro(filtro, criteria);
+		
+		/**Inicialização da cidade e estado com um LeftOuterJoin na criteria para 
+		 *  evitar erro por causa da inicialização Lazy da tabela pois a consulta não
+		 *  está preparada para chamar os atributos desejados e há registros nulos.
+		 *  @author mpituba */
+		criteria.createAlias("endereco.cidade", "c", JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("c.estado", "e", JoinType.LEFT_OUTER_JOIN);
+		
+		
 		//Ao usar Criteria resolve-se o problema n + 1 das consultas SQL.
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
 	}

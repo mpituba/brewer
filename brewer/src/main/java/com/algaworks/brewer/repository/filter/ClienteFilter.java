@@ -11,8 +11,7 @@ public class ClienteFilter {
 
 	private String nome;
 	private String cpfOuCnpj;
-	private TipoPessoa tipoPessoa;
-	private String telefone;
+	
 	
 	//Getters and Setters
 	public String getNome() {
@@ -27,17 +26,9 @@ public class ClienteFilter {
 	public void setCpfOuCnpj(String cpfOuCnpj) {
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
-	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
-	}
-	public void setTipoPessoa(TipoPessoa tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
-	}
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	
+	public Object getCpfOuCpnjSemFormatacao() {
+		return TipoPessoa.removerFormatacao(this.cpfOuCnpj);
 	}
 	
 }
