@@ -42,7 +42,7 @@ public class OrderElementTagProcessor extends AbstractElementTagProcessor{
 		 *  que chama o fragmento para a ordenação ascendente e descendente. @mpituba
 		 */
 		model.add(modelFactory.createStandaloneElementTag("th:block","th:replace",
-						String.format("fragments/Ordenacao :: order (%s, %s, %s)",
+						String.format("fragments/Ordenacao :: order (%s, %s, '%s')",
 						page.getValue(), field.getValue(), text.getValue())));
 		
 		
