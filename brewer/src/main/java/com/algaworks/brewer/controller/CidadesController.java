@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -57,9 +58,10 @@ public class CidadesController {
 	
 	
 	
-	/**Chamada do Estado/Cidade do frontEnd no cadastro de clientes
-	 @param codigoEstado @author mpituba */
-	@Cacheable("cidades")
+	/**Chamada do Estado/Cidade do frontEnd no cadastro de clientes	 @param codigoEstado 
+	 @Cacheable Faz cache dos dados da consulta. Ao retirar key em conjunto com allEntries
+	 no CacheEvict deleta-se todas as entradas. @author mpituba */
+	@Cacheable(value = "cidades", key = "#codigoEstado")
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<Cidade>  pesquisarPorCodigoEstado(
 	       @RequestParam(name= "estado", defaultValue = "-1")Long codigoEstado){
@@ -72,10 +74,11 @@ public class CidadesController {
 		return cidades.findByEstadoCodigo(codigoEstado);
 	}
 	
-	/**
-	 * Controlador do CadastroCidade @author mpituba
-	 */
+	/** Controlador do CadastroCidade. @cacheEvict Apaga as entradas do Cache quando a
+	 *  tabela recebe um atualização. Em lugar de Key para o CacheEvict pode-se usar 
+	 *  allEntries para apagar todo o cache. @author mpituba */
 	@PostMapping("/nova")
+	@CacheEvict(value = "cidades", key = "#cidade.estado.codigo", condition= "#cidade.temEstado()") 
 	public ModelAndView salvar(@Valid Cidade cidade, BindingResult result, RedirectAttributes attributes) {
 		
 		if (result.hasErrors()) {

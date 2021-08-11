@@ -1,6 +1,7 @@
 package com.algaworks.brewer.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,6 +42,11 @@ public class Cidade implements Serializable{
 	private Estado estado;
 
 	
+	//Método de classe
+	public boolean temEstado() {
+		return estado != null;
+	}
+	
 	//Getters and Setters
 	public String getNome() {
 		return nome;
@@ -66,6 +72,22 @@ public class Cidade implements Serializable{
 		this.estado = estado;
 	}
 	
-	
-	
+		
+	//Equal e Hashcode
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cidade other = (Cidade) obj;
+		return Objects.equals(codigo, other.codigo);
+	}
 }
