@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,6 +34,7 @@ public class Cidade implements Serializable{
 	 * quando uma cidade for selecionada. E o @JsonIgnore do Jackson não envia a 
 	 * propriedade para o frontend na busca. @mpituba
 	 */
+	@NotNull(message = "Estado é obrigatório")
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "codigo_estado")
 	@JsonIgnore 
