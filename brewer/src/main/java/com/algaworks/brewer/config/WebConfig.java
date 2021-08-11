@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.Locale;
 
 import org.springframework.beans.BeansException;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.config.CacheManagementConfigUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -52,6 +56,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 @ComponentScan(basePackageClasses = { CervejasController.class })
 @EnableWebMvc
 @EnableSpringDataWebSupport
+@EnableCaching
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 	
 	//Atributo usado pela aplicação
@@ -160,6 +165,16 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public LocaleResolver localeResolver() {
 		return new FixedLocaleResolver(new Locale("pt", "BR"));
 	}
+	
+	
+	/**
+	 * Bean que implementa o cache. Juntamente como o @EnableCaching no WebConfig
+	 * e a amnotação no controlador. @author mpituba
+	 */
+ 	@Bean
+ 	public CacheManager cacheManager() {
+ 		return new ConcurrentMapCacheManager();
+ 	}
  	
 
 
