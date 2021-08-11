@@ -151,3 +151,18 @@
 .table-clientes-col-acoes{
 	text-align: center;
 }
+
+/* Colunas - Pesquisa de Cidades */
+.table-cidades-col-nome {
+	width: 250px;
+	text-align: left;
+}
+
+.table-cidades-col-estado {
+	width: 250px;
+	text-align: left;
+}
+
+.table-cidades-col-acoes{
+	text-align: right;
+}

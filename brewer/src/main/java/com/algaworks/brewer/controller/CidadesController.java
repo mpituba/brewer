@@ -2,12 +2,16 @@ package com.algaworks.brewer.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.algaworks.brewer.controller.page.PageWrapper;
 import com.algaworks.brewer.model.Cidade;
 import com.algaworks.brewer.repository.Cidades;
 import com.algaworks.brewer.repository.Estados;
+import com.algaworks.brewer.repository.filter.CidadeFilter;
 import com.algaworks.brewer.service.CadastroCidadeService;
 import com.algaworks.brewer.service.exception.NomeCidadeJaCadastradaException;
 
@@ -81,7 +87,7 @@ public class CidadesController {
 		
 		}catch(NomeCidadeJaCadastradaException e) {
 			
-			result.rejectValue("nome",e.getMessage(), e.getMessage());
+			result.rejectValue("nome", e.getMessage(), e.getMessage());
 			
 			return nova(cidade);
 		}
@@ -90,6 +96,36 @@ public class CidadesController {
 		attributes.addFlashAttribute("mensagem", "Cidade salva com sucesso!");
 		
 		return new ModelAndView("redirect:/cidades/nova");
+	}
+	
+	/**
+	 * Controlador de PesquisasCidades
+	 * @param cidadeFilter - Modelo do Filtro passado para a pesquisa da página.
+	 * @param result - Binding das validações. 
+	 * @param pageable - Objeto responsável pela paginação da página de pesquisa.
+	 * @param httpServletRequest  - Objeto Servlet.
+	 * @PageableDefault(size = 2) - Parâmetro responsável pelo número de registros
+	 * por página, aqui são dois registros por página.
+	 * PageWrapper - Envelopador de filtros genérico neste caso cidade e seus parâmetros.
+	 * @author mpituba
+	 */
+	
+	@GetMapping
+	public ModelAndView pesquisar(CidadeFilter cidadeFilter, BindingResult result, 
+			@PageableDefault(size = 7) Pageable pageable, HttpServletRequest httpServletRequest ) {
+		ModelAndView mv = new ModelAndView("cidade/PesquisaCidades");
+		mv.addObject("estados", estados.findAll());
+		
+		
+		//System.out.println(">>>>> PageNumber : " + pageable.getPageNumber());
+		//System.out.println(">>>>> PageSize   : " + pageable.getPageSize());
+		
+		//Instanciado o PageWrapper		
+		PageWrapper <Cidade> paginaWrapper = new PageWrapper<> (cidades.filtrar(cidadeFilter, pageable),
+				httpServletRequest);
+		
+		mv.addObject("pagina", paginaWrapper);
+		return mv;
 	}
 	
 	
