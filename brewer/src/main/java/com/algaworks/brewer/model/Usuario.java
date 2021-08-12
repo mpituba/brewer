@@ -1,61 +1,116 @@
 package com.algaworks.brewer.model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Usuario {
+@Entity
+@Table(name = "usuario")
+public class Usuario implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
-	@NotBlank(message="O nome deve ser preenchido!")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long codigo;
+	
+	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	
-	@NotBlank(message="O e-mail deve ser preenchido!")
+	@NotBlank(message = "E-mail inválido")
 	private String email;
-	
-	@NotBlank(message="A data de nascimento deve ser preenchida!")
-	private String dataNascimento;
 	
 	private String senha;
 	
-	private String confirmacao;
-
+	private Boolean ativo;
+	
+	@NotNull(message = "Selecione ao menos um grupo")
+	@ManyToMany
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
+				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))
+	private List<Grupo> grupos;
+	
+	@NotNull(message = "Data de nascimento é obrigatório")
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+	
+	//Getters and Setters
+	public Long getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
+	}
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public String getConfirmacao() {
-		return confirmacao;
+	public Boolean getAtivo() {
+		return ativo;
 	}
-
-	public void setConfirmacao(String confirmacao) {
-		this.confirmacao = confirmacao;
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+	
+	
+	//Equal and HashCode
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(codigo, other.codigo);
+	}
+	
 	
 	
 }
