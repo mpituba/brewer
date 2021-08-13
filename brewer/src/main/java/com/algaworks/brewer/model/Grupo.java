@@ -22,6 +22,7 @@ public class Grupo implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
 	private String nome;
 	
 	@ManyToMany

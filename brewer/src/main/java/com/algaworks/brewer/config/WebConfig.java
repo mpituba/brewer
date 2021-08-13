@@ -7,8 +7,6 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.BeansException;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
-import org.springframework.cache.config.CacheManagementConfigUtils;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -146,8 +144,10 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public FormattingConversionService mvcConversionService () {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new EstiloConverter());
+		
 		//Conversor para o campo cidade em CadastroCliente
 		conversionService.addConverter(new CidadeConverter());
+		
 		//Conversor para o campo estado
 		conversionService.addConverter(new EstadoConverter());
 		

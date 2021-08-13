@@ -6,7 +6,6 @@
 	xmlns:brewer="http://brewer.algaworks.com">
 
 <head>
-	<!-- O css abaixo foi copiado do git do projeto, o da internet não funciona. -->
 	<link rel="stylesheet" type="text/css"	
 		th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}" />
 	
@@ -22,59 +21,51 @@
 
 			<div class="page-header">
 				<div class="container-fluid">
+				
 					<h1>Cadastro de usuário</h1>
+					
 				</div>
 			</div>
 
 			<div class="container-fluid">
 
-				<!-- <div class="alert  alert-danger  alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<i class="fa  fa-exclamation-circle"></i> Já existe um produto com
-					o nome informado.
-				</div> -->
-				<!-- Este objeto, com esta sintaxe, permite que seja visualizado fora do formulário -->
-				
 				<form method="POST" th:object="${usuario}" class="form-vertical  js-form-loading">
 					
 					<!-- Código Thymeleaf customizado das validações e mensagens de sucesso. -->
 					<brewer:message/>
 					
 					<div class="row">
-						<div class="col-sm-12 form-group bw-required">
-							<label for="nome" class="control-label">Nome</label> <input
-								id="nome" type="text" class="form-control" />
+						<div class="col-sm-12 form-group bw-required" brewer:classforerror="nome">
+							<label for="nome" class="control-label">Nome</label>
+							 <input	id="nome" type="text" class="form-control" autofocus="autofocus" th:field="*{nome}"/>
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="col-sm-6 form-group bw-required">
-							<label for="email" class="control-label">E-mail</label> <input
-								id="email" type="text" class="form-control" />
+							<label for="email" class="control-label">E-mail</label>
+							<input id="email" type="text" class="form-control" th:field="*{email}" />
 						</div>
 						
 						<div class="col-sm-3 form-group bw-required">
-							<label for="dataNascimento" class="control-label">Data de nascimento</label> <input
-								id="dataNascimento" type="text" class="form-control" />
+							<label for="dataNascimento" class="control-label">Data de nascimento</label>
+							<input	id="dataNascimento" type="text" class="form-control" th:field="*{dataNascimento}" />
 						</div>
 					</div>
 					
 					<div class="row">
-						<div class="col-sm-3 form-group">
-							<label for="email">Senha</label> <input
-								id="email" type="text" class="form-control" />
+						<div class="col-sm-3 form-group bw-required">
+							<label for="senha" class="control-label">Senha</label>
+							 <input	id="senha" type="password" class="form-control" />
 						</div>
 						
-						<div class="col-sm-3 form-group">
-							<label for="dataNascimento">Confirmação de senha</label> <input
-								id="dataNascimento" type="text" class="form-control" />
+						<div class="col-sm-3 form-group bw-required">
+							<label for="confirmacaoSenha" class="control-label">Confirmação de senha</label> 
+							<input id="confirmacaoSenha" type="password" class="form-control" />
 						</div>
 						
-						<div class="col-sm-3 ">
-							<label >Status</label> 
+						<div class="col-sm-3 form-group" >
+							<label  class="control-label">Status</label> 
 							<div>
 								<input	type="checkbox" class="js-status" data-size="small"
 											data-off-color="danger" data-on-text="Ativo"
@@ -86,13 +77,18 @@
 					
 					<div class="row">
 						
-						<div class="col-sm-4">
-							<label for="grupos">Grupos</label> 
-							<div>	
-								<input	id="grupos" type="checkbox" />
-								<span class="bw-checkbox-itens-space">Administrador</span>
-								<input	id="grupos" type="checkbox" />
-								<span class="bw-checkbox-itens-space">Vendedor</span>
+						<div class="col-sm-4 form-group bw-required" brewer:classforerror="grupos">
+							<label class="control-label">Grupos</label> 
+							<div>
+								<div class="checkbox checkbox-inline">	
+									<input	type="checkbox" />
+									<label>Administrador</label>
+								</div>
+								
+								<div class="checkbox checkbox-inline">
+									<input	type="checkbox" />
+									<label>Vendedor</label>
+								</div>
 							</div>
 						</div>
 						
