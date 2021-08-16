@@ -12,15 +12,12 @@ import javax.validation.constraints.Pattern;
 
 /**
  * Classe Utilizada para criar o validador @SKU,
- * usado para as regras de validação do campo SKU.
- * 
- * @author mpituba
+ * usado para as regras de validação do campo SKU. @author mpituba
  */
 
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {})
-//Padrão de validação baseado em regex
 @Pattern(regexp = "([a-zA-Z]{2}\\d{4})?")
 public @interface SKU {
 	
