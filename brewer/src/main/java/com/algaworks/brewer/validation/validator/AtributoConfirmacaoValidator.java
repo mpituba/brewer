@@ -9,9 +9,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import com.algaworks.brewer.validation.AtributoConfirmacao;
 
 /**
- * 
- * 
- * 
  *  Esta classe implementa o código de validação para o atributo criado @AtributoConfirmacao,
  * que é usado para verificar se os campos de senha e confirmacaoSenha são iguais @author mpituba
  */
