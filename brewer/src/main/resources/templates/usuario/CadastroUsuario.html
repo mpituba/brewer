@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css"	
 		th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}" />
 	
+	
 	<title>Cadastro de usuário</title>
 
 	
@@ -42,14 +43,15 @@
 					</div>
 					
 					<div class="row">
-						<div class="col-sm-6 form-group bw-required">
+						<div class="col-sm-6 form-group bw-required bw-required" brewer:classforerror="email">
 							<label for="email" class="control-label">E-mail</label>
 							<input id="email" type="text" class="form-control" th:field="*{email}" />
 						</div>
 						
 						<div class="col-sm-3 form-group bw-required">
 							<label for="dataNascimento" class="control-label">Data de nascimento</label>
-							<input	id="dataNascimento" type="text" class="form-control" th:field="*{dataNascimento}" />
+							<input	id="dataNascimento" type="text"  class="form-control js-date" 
+								th:field="*{dataNascimento}" autocomplete="off"/>
 						</div>
 					</div>
 					
@@ -110,6 +112,7 @@
 		</section>
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
+	
 	<script>
 		$('.js-status').bootstrapSwitch();
 	</script>
