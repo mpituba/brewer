@@ -27,7 +27,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	/**
 	 * Classe do Spring MVC que indica os controllers. A classe configurada aqui no caso
-	 * o WebConfig.class ensina o Spring a achar os controllers.
+	 * o WebConfig.class ensina o Spring a achar os controllers. @author mpituba
 	 */
 	@Override
 	protected Class<?>[] getServletConfigClasses() {

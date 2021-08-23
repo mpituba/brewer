@@ -15,8 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.algaworks.brewer.validation.AtributoConfirmacao;
@@ -36,7 +36,8 @@ public class Usuario implements Serializable{
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	
-	@NotBlank(message = "E-mail inválido")
+	@NotBlank(message = "E-mail é obrigatório")
+	@Email(message = "E-mail inválido")
 	private String email;
 	
 	private String senha;
@@ -46,7 +47,7 @@ public class Usuario implements Serializable{
 	
 	private Boolean ativo;
 	
-	@NotNull(message = "Selecione ao menos um grupo")
+	//@NotNull(message = "Selecione ao menos um grupo")
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
 				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))
@@ -54,65 +55,79 @@ public class Usuario implements Serializable{
 	
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
+
 	
 	//Getters and Setters
 	public Long getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getSenha() {
 		return senha;
 	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
 	public String getConfirmacaoSenha() {
 		return confirmacaoSenha;
 	}
+
 	public void setConfirmacaoSenha(String confirmacaoSenha) {
 		this.confirmacaoSenha = confirmacaoSenha;
 	}
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
+
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-	
+
 	public List<Grupo> getGrupos() {
 		return grupos;
 	}
+
 	public void setGrupos(List<Grupo> grupos) {
 		this.grupos = grupos;
 	}
-	
-	
-	//Equal and HashCode
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	//Equals and HashCode
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(ativo, codigo, confirmacaoSenha, dataNascimento, email, grupos, nome, senha);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -122,9 +137,13 @@ public class Usuario implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(codigo, other.codigo);
+		return Objects.equals(ativo, other.ativo) && Objects.equals(codigo, other.codigo)
+				&& Objects.equals(confirmacaoSenha, other.confirmacaoSenha)
+				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
+				&& Objects.equals(grupos, other.grupos) && Objects.equals(nome, other.nome)
+				&& Objects.equals(senha, other.senha);
 	}
 	
 	
-	
+		
 }
