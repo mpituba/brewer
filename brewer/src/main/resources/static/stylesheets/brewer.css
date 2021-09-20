@@ -166,3 +166,14 @@
 .table-cidades-col-acoes{
 	text-align: right;
 }
+
+/*
+#############################################################
+# CUSTOMIZAÇÃO DE COMPONENTES Awesome Checkbox do Bootstrap #
+#############################################################
+*/
+
+.checkbox input[type="checkbox"]:checked + input + label::after {
+	font-family: 'FontAwesome';
+	content: "\f00c;"
+}

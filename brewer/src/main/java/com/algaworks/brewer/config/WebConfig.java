@@ -35,6 +35,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.algaworks.brewer.controller.CervejasController;
+import com.algaworks.brewer.controller.GrupoConverter;
 import com.algaworks.brewer.controller.converter.CidadeConverter;
 import com.algaworks.brewer.controller.converter.EstadoConverter;
 import com.algaworks.brewer.controller.converter.EstiloConverter;
@@ -154,6 +155,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 		//Conversor para o campo estado
 		conversionService.addConverter(new EstadoConverter());
+		
+		//Conversor do Grupo
+		conversionService.addConverter(new GrupoConverter());
 		
 		//Conversor para o tipo BigDecimal informar o tipo de separação em português no js
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
