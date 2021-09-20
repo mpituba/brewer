@@ -66,6 +66,9 @@
 			<!-- Apache Bean Utils -->
 			<commons-beanutils.version>1.9.2</commons-beanutils.version>
 			
+			<!-- Spring Security -->
+			<spring-security-web.version>4.1.1.RELEASE</spring-security-web.version>
+			
 		</properties>
 		
 		<build>
@@ -268,6 +271,14 @@
 				<version>${commons-beanutils.version}</version>
 				<scope>compile</scope>
 			</dependency>
+			
+			<!-- Spring Security -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring-security-web.version}</version>
+				<scope>compile</scope>
+			</dependency>			
 			
 		</dependencies>
 </project>

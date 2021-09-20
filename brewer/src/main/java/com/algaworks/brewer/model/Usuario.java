@@ -123,6 +123,11 @@ public class Usuario implements Serializable{
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+	
+	/*Método da classe para a senha*/
+	public boolean isNovo() {
+		return codigo == null;
+	}
 
 	//Equals and HashCode
 	@Override
