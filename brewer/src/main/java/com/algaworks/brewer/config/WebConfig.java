@@ -54,7 +54,7 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  * como o WebMvcConfigurerAdapter.
  * Quando for necessário configurar outra tecnologia deve-se alterar os métodos 
  * abaixo: ViewResolver, TemplateEngine e ITemplateResolver para adequar a tecnologia,
- * no caso de não se usar mais o Thymeleaf por exemplo e o jsp em seu lugar.
+ * no caso de não se usar mais o Thymeleaf e se usar por exemplo o jsp em seu lugar.
  * @author mpituba
  */
 @Configuration
