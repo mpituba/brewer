@@ -54,6 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/login") //Requisita a página de login
 				.permitAll()
 				.and()
+			.exceptionHandling()
+				.accessDeniedPage("/403") //Chama o controller de acesso negado
+				.and()
 			.csrf().disable();
 	}
 	

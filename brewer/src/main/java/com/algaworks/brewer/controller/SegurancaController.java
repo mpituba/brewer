@@ -18,4 +18,13 @@ public class SegurancaController {
 		
 		return "login";
 	}
+	
+	
+	//Retorna a página de acesso negado 403
+	@GetMapping("/403")
+	public String acessoNegado() {
+		
+		return "403";
+		
+	}
 }
