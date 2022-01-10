@@ -80,6 +80,22 @@ Brewer.MaskDate = (function() {
 	
 }());
 
+Brewer.Security = (function() {
+	function Security() {
+	this.token = $('input[name=_csrf]').val();
+	this.header = $('input[name=_csrf_header]').val();
+	}
+	
+	Security.prototype.enable = function() {
+		$(document).ajaxSend(function(event, , settings) {
+			jqxhr.setRequestHeader(this.header, this.token);
+		}.bind(this));		
+	}
+	
+	return Security;
+	
+}());
+
 
 $(function(){
 	//Chama a função de máscara para moeda
@@ -97,5 +113,8 @@ $(function(){
 	//Chama a função do DatePicker
 	var maskDate = new Brewer.MaskDate();
 	maskDate.enable();
+	
+	var security = new Brewer.Security();
+	security.enable();
 	
 });

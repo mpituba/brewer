@@ -26,7 +26,7 @@ public class FotoStorageLocal implements FotoStorage{
 	private Path localTemporario;
 	
 	public FotoStorageLocal() {
-		this(getDefault().getPath(System.getenv("HOME"), "brewerfotos"));
+		this(getDefault().getPath(System.getenv("HOME"), ".brewerfotos"));
 		
 	}
 	
@@ -116,7 +116,7 @@ public class FotoStorageLocal implements FotoStorage{
 	
 	
 	private String renomearArquivo(String nomeOriginal) {
-		String novoNome = UUID.randomUUID().toString() + "_"+nomeOriginal;
+		String novoNome = UUID.randomUUID().toString() + "_" + nomeOriginal;
 		
 		if(logger.isDebugEnabled()) {
 			logger.debug(String.format("Nome Original: %s, Novo nome: %s",nomeOriginal, novoNome));

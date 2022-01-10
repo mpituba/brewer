@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.algaworks.brewer.security.AppUserDetailsService;
 
@@ -37,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		web.ignoring()
 			//Permissão para a pasta css e js e permite a pasta de imagens
 			.antMatchers("/layout/**")
+			.antMatchers("/javascripts/**")
+			.antMatchers("/stylesheets/**")
+			//.antMatchers("/fotos/**")
 			.antMatchers("/images/**");
 	}
 	
@@ -54,12 +58,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/login") //Requisita a página de login
 				.permitAll()
 				.and()
-			.exceptionHandling()
-				.accessDeniedPage("/403") //Chama o controller de acesso negado
+			.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.and()
-			.csrf().disable();
-	}
+			.exceptionHandling()
+				.accessDeniedPage("/403"); //Chama o controller de acesso negado
+	}			
 	
+		
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

@@ -30,7 +30,7 @@
 
 			<div class="container-fluid">
 
-				<form method="POST" th:object="${usuario}" >
+				<form method="POST" th:object="${usuario}" th:action="@{/usuarios/novo}">
 					
 					<!-- Código Thymeleaf customizado das validações e mensagens de sucesso. -->
 					<brewer:message/>

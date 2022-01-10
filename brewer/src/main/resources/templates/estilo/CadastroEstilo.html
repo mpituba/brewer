@@ -47,7 +47,7 @@
 				
 								
 				
-				<form method="POST" th:object="${estilo}" class="form-vertical  js-form-loading">
+				<form method="POST" th:object="${estilo}" class="form-vertical  js-form-loading" th:action="@{/estilos/novo}">
 					<!-- Código Thymeleaf customizado das validações e mensagens de sucesso. -->
 					<brewer:message/>
 					
