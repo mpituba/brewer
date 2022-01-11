@@ -62,8 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.and()
 			.exceptionHandling()
-				.accessDeniedPage("/403");//Chama o controller de acesso negado
-		
+				.accessDeniedPage("/403")//Chama o controller de acesso negado
+				.and()	
+			.sessionManagement()
+				.invalidSessionUrl("/login");//Leva uma sessão inválida para a página de login
+				
+				
 		/** Máximo de vezes que mesmo usuário fica logado em abas diferentes
 						.and()
 			.sessionManagement()
