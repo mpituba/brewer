@@ -10,4 +10,9 @@ public class ErrosController {
 	public String paginaNaoEncontrada() {
 		return "404";
 	}
+	
+	@GetMapping("/500")
+	public String erroQuinhentos() {
+		return "500";
+	}
 }
