@@ -69,6 +69,9 @@
 			<!-- Spring Security -->
 			<spring-security.version>4.1.1.RELEASE</spring-security.version>
 			
+			<!-- Thymeleaf Extras SpringSecurity -->
+			<thymeleaf-extras-springsecurity.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity.version>
+			
 		</properties>
 		
 		<build>
@@ -286,7 +289,16 @@
 				<artifactId>spring-security-config</artifactId>
 				<version>${spring-security.version}</version>
 				<scope>compile</scope>
-			</dependency>			
+			</dependency>	
+			
+			
+			<!-- Thymeleaf Extras SpringSecurity -->
+			<dependency>
+				<groupId>org.thymeleaf.extras</groupId>
+				<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+				<version>${thymeleaf-extras-springsecurity.version}</version>
+				<scope>compile</scope>
+			</dependency>		
 			
 		</dependencies>
 </project>
