@@ -21,7 +21,7 @@
 					<h1>Pesquisa de cidades</h1>
 				</div>
 				
-				<div class="col-sm-2">
+				<div class="col-sm-2" sec:authorize-url="/cidades/nova">
 					<div class="aw-page-header-controls">
 						<!-- Vai para a página de cadastro de clientes -->
 						<a class="btn btn-default" th:href="@{/cidades/nova}">
@@ -75,7 +75,7 @@
 							<brewer:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 												
-						<th class="table-cidades-col-acoes">Ações</th>
+						<th class="table-cidades-col-acoes" sec:authorize="hasRole('ROLE_CADASTRAR_CIDADE')">Ações</th>
 					</tr>
 				</thead>
 				
@@ -87,7 +87,7 @@
 						<td class="text-left" th:text="${cidade.nome}">Rio de Janeiro</td>
 						
 						
-						<td class="text-right">
+						<td class="text-right" sec:authorize="hasRole('ROLE_CADASTRAR_CIDADE')">
 							<a class="btn btn-link btn-xs" title="Editar">
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
