@@ -50,11 +50,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	//Filtro para forçar o encoding de caracteres para utf-8.
 	@Override
 	protected Filter[] getServletFilters() {
-		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-		characterEncodingFilter.setEncoding("UTF-8");
-		characterEncodingFilter.setForceEncoding(true);
 		
-		return new Filter[] {characterEncodingFilter};
+		
+		return new Filter[] { };
 	}
 	
 	@Override
