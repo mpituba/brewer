@@ -17,7 +17,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-sm-10">
-					<h1>Pesquisa de cervejas</h1>
+					<h1>Pesquisa de estilos</h1>
 				</div>
 				
 				<div class="col-sm-2">
@@ -58,6 +58,10 @@
 						
 						<th class="table-cervejas-col-nome">
 							<brewer:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
+						
+						<th class="table-cervejas-col-acoes">
+							<brewer:order page="${pagina}" field="acoes" text="Ações"/>
 						</th>
 						
 					</tr>

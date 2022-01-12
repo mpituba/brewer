@@ -1,84 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:brewer="http://brewer.algaworks.com">
 
 <body>
 <aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
 			<div class="aw-layout-sidebar__content">
 
-				<nav class="aw-menu  js-menu">
+				<nav class="aw-menu  js-menu is-expanded is-active">
 					<ul class="aw-menu__list">
 
-						<li class="aw-menu__item"><a href="dashboard.html"><i
-								class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a></li>
+						<li class="aw-menu__item is-expanded">
+							<a href="dashboard.html">
+								<i	class="fa  fa-fw  fa-home"></i>
+								<span>Dashboard</span>
+							</a>
+						</li>
 						
 						<!-- Início Cadastros -->
-						<li class="aw-menu__item  is-expanded"><a href="#"> <i
-								class="fa  fa-fw  fa-file-text"></i><span>Cadastros</span> <i
-								class="aw-menu__navigation-icon  fa"></i>
+						<li class="aw-menu__item is-active is-expanded">
+							<a href="#">
+								<i class="fa  fa-fw  fa-truck"></i>
+								<span>Estoque</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
 							</a>
 	
-								<ul class="aw-menu__list  aw-menu__list--sublist">
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/cervejas/novo}">Cadastro de cerveja</a></li>
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/clientes/novo}">Cadastro de cliente</a></li>
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/usuarios/novo}">Cadastro de usuário</a></li>
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/estilos/novo}">Cadastro de estilo</a></li>
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/cidades/nova}">Cadastro de cidade</a></li>			
-									
-									
-								</ul></li>
-								<!-- Fim Cadastros -->
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/estilos}">
+									<a th:href="@{/estilos}">Estilos</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/cervejas}">
+									<a	th:href="@{/cervejas}">Cervejas</a>
+								</li>
+							</ul>
+						</li>
+						<!-- Fim Cadastros -->
 								
 						<!-- Pesquisas -->
 						
-						<li class="aw-menu__item  is-expanded"><a href="#"> <i
-								class="fa  fa-fw  fa-file-text"></i><span>Pesquisas</span> <i
-								class="aw-menu__navigation-icon  fa"></i>
+						<li class="aw-menu__item is-expanded is-active">
+							<a href="#">
+								<i class="fa  fa-fw  fa-database"></i>
+								<span>Pesquisas</span>
+								<i class="aw-menu__navigation-icon  fa"></i>
 							</a>
 								
-								<ul class="aw-menu__list  aw-menu__list--sublist">
-									
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/cervejas}">Pesquisa de cervejas</a></li>
-									
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/clientes}">Pesquisa de clientes</a></li>
-									
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/estilos}">Pesquisa de estilos</a></li>
-									
-									<li class="aw-menu__item  aw-menu__item--link"><a
-										th:href="@{/cidades}">Pesquisa de cidades</a></li>
-									
-								</ul></li>
+							<ul class="aw-menu__list  aw-menu__list--sublist">
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/cervejas}">Pesquisa de cervejas</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/clientes}">Pesquisa de clientes</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/estilos}">Pesquisa de estilos</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/cidades}">Pesquisa de cidades</a>
+								</li>
+								
+							</ul>
+						</li>
 						
 						
 						<!-- Fim Pesquisas -->
 
-						<li class="aw-menu__item  is-expanded"><a href="#"> <i
-								class="fa  fa-fw  fa-file-text"></i><span>Páginas comuns</span>
+						<li class="aw-menu__item is-expanded is-active">
+							<a href="#">
+								<i class="fa  fa-fw  fa-database"></i>
+								<span>Cadastros</span>
 								<i class="aw-menu__navigation-icon  fa"></i>
-						</a>
+							</a>
 
 							<ul class="aw-menu__list  aw-menu__list--sublist">
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									href="pagina-vazia.html">Página vazia</a></li>
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									href="login.html">Login</a></li>
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									href="esqueceu-a-senha.html">Esqueceu a senha</a></li>
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									href="403.html">403</a></li>
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									th:href="@{/404.html}">404</a></li>
-								<li class="aw-menu__item  aw-menu__item--link"><a
-									th:href="@{/500.html}">500</a></li>
-							</ul></li>
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/cidades/nova}">
+									<a th:href="@{/cidades/nova}">Cidades</a>
+								</li>
+																
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/clientes}">
+									<a th:href="@{/clientes/novo}">Clientes</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/usuarios/novo}">
+									<a th:href="@{/usuarios/novo}">Usuários</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a href="403.html">403</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/404.html}">404</a>
+								</li>
+								
+								<li class="aw-menu__item  aw-menu__item--link">
+									<a th:href="@{/500.html}">500</a>
+								</li>
+								
+							</ul>
+						</li>
 
 					</ul>
 				</nav>
