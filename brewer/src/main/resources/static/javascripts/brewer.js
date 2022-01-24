@@ -8,8 +8,8 @@ Brewer.MaskMoney = (function(){
 	}
 	
 	MaskMoney.prototype.enable = function(){
-		this.decimal.maskMoney({decimal: ',', thousands: '.'});
-		this.plain.maskMoney({precision: 0, thousands: '.'});
+		this.decimal.maskMoney({ decimal: ',', thousands: '.' });
+		this.plain.maskMoney({ precision: 0, thousands: '.' });
 	}
 	
 	return MaskMoney;
@@ -87,7 +87,7 @@ Brewer.Security = (function() {
 	}
 	
 	Security.prototype.enable = function() {
-		$(document).ajaxSend(function(event, , settings) {
+		$(document).ajaxSend(function(event, jqxhr , settings) {
 			jqxhr.setRequestHeader(this.header, this.token);
 		}.bind(this));		
 	}

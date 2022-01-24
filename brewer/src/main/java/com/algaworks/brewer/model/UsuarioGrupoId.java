@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class usuarioGrupoId implements Serializable {
+public class UsuarioGrupoId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class usuarioGrupoId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		usuarioGrupoId other = (usuarioGrupoId) obj;
+		UsuarioGrupoId other = (UsuarioGrupoId) obj;
 		return Objects.equals(grupo, other.grupo) && Objects.equals(usuario, other.usuario);
 	}
 	

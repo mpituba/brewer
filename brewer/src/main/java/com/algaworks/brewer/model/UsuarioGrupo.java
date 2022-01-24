@@ -11,16 +11,16 @@ import javax.persistence.Table;
 public class UsuarioGrupo {
 	
 	@EmbeddedId
-	private usuarioGrupoId id;
+	private UsuarioGrupoId id;
 
 	
 	//Getters and Setters
 	
-	public usuarioGrupoId getId() {
+	public UsuarioGrupoId getId() {
 		return id;
 	}
 
-	public void setId(usuarioGrupoId id) {
+	public void setId(UsuarioGrupoId id) {
 		this.id = id;
 	}
 	

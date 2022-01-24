@@ -7,10 +7,10 @@
 <aside class="aw-layout-sidebar  js-sidebar" th:fragment="layout-sidebar">
 			<div class="aw-layout-sidebar__content">
 
-				<nav class="aw-menu  js-menu is-expanded is-active">
+				<nav class="aw-menu  js-menu ">
 					<ul class="aw-menu__list">
 
-						<li class="aw-menu__item is-expanded">
+						<li class="aw-menu__item ">
 							<a href="dashboard.html">
 								<i	class="fa  fa-fw  fa-home"></i>
 								<span>Dashboard</span>
@@ -18,7 +18,7 @@
 						</li>
 						
 						<!-- Início Cadastros -->
-						<li class="aw-menu__item is-active is-expanded">
+						<li class="aw-menu__item ">
 							<a href="#">
 								<i class="fa  fa-fw  fa-truck"></i>
 								<span>Estoque</span>
@@ -39,7 +39,7 @@
 								
 						<!-- Pesquisas -->
 						
-						<li class="aw-menu__item is-expanded is-active">
+						<li class="aw-menu__item">
 							<a href="#">
 								<i class="fa  fa-fw  fa-database"></i>
 								<span>Pesquisas</span>
@@ -48,23 +48,23 @@
 								
 							<ul class="aw-menu__list  aw-menu__list--sublist">
 								
-								<li class="aw-menu__item  aw-menu__item--link">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/cervejas}">
 									<a th:href="@{/cervejas}">Pesquisa de cervejas</a>
 								</li>
 								
-								<li class="aw-menu__item  aw-menu__item--link">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/clientes}">
 									<a th:href="@{/clientes}">Pesquisa de clientes</a>
 								</li>
 								
-								<li class="aw-menu__item  aw-menu__item--link">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/estilos}">
 									<a th:href="@{/estilos}">Pesquisa de estilos</a>
 								</li>
 								
-								<li class="aw-menu__item  aw-menu__item--link">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/cidades}">
 									<a th:href="@{/cidades}">Pesquisa de cidades</a>
 								</li>
 								
-								<li class="aw-menu__item  aw-menu__item--link">
+								<li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/usuarios}">
 									<a th:href="@{/usuarios/}">Pesquisa de usuários</a>
 								</li>
 								
@@ -74,7 +74,7 @@
 						
 						<!-- Fim Pesquisas -->
 
-						<li class="aw-menu__item is-expanded is-active">
+						<li class="aw-menu__item">
 							<a href="#">
 								<i class="fa  fa-fw  fa-database"></i>
 								<span>Cadastros</span>

@@ -1,4 +1,4 @@
-package com.algaworks.brewer.controller;
+package com.algaworks.brewer.controller.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.StringUtils;

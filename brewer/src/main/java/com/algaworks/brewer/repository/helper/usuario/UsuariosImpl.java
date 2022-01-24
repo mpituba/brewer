@@ -81,7 +81,7 @@ public class UsuariosImpl implements UsuariosQueries {
 				for (Long codigoGrupo : filtro.getGrupos().stream().mapToLong(Grupo::getCodigo).toArray()) {
 					//System.out.println(">>>>> codigoGrupo: " + codigoGrupo);
 					DetachedCriteria dc = DetachedCriteria.forClass(UsuarioGrupo.class);
-					dc.add(Restrictions.eqOrIsNull("id.grupo.codigo", codigoGrupo));
+					dc.add(Restrictions.eq("id.grupo.codigo", codigoGrupo));
 					dc.setProjection(Projections.property("id.usuario"));
 					
 					subqueries.add(Subqueries.propertyIn("codigo", dc));

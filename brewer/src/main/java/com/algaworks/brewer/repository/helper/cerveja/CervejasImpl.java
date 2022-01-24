@@ -69,11 +69,12 @@ public class CervejasImpl implements CervejasQueries{
 			}
 			
 			if (isEstiloPresente(filtro)) {
-				criteria.add(Restrictions.eqOrIsNull("estilo", filtro.getEstilo()));
+				criteria.add(Restrictions.eq("estilo", filtro.getEstilo()));
 			}
 			
 			if (filtro.getSabor() != null) {
-				criteria.add(Restrictions.eqOrIsNull("sabor", filtro.getSabor()));
+				criteria.add(Restrictions.eq("sabor", filtro.getSabor()));
+				
 			}
 			
 			if (filtro.getOrigem() != null) {

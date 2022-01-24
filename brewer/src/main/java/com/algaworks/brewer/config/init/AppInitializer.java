@@ -4,7 +4,7 @@ import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration.Dynamic;
 
-
+import org.springframework.web.filter.HttpPutFormContentFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.algaworks.brewer.config.JPAConfig;
@@ -51,8 +51,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected Filter[] getServletFilters() {
 		
-		
-		return new Filter[] { };
+		//As duas linhas abaixo tambem fazem funcionar o ajax pelo javascript
+		HttpPutFormContentFilter httpPutFormContentFilter = new HttpPutFormContentFilter();		
+		return new Filter[] { httpPutFormContentFilter };
 	}
 	
 	@Override

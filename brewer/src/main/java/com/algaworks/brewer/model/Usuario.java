@@ -3,7 +3,6 @@ package com.algaworks.brewer.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,53 +12,58 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.algaworks.brewer.validation.AtributoConfirmacao;
 
-@AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha", 
-						message = "Confirmação da senha não confere")
+@AtributoConfirmacao(atributo = "senha", atributoConfirmacao = "confirmacaoSenha"
+				, message = "Confirmação da senha não confere")
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable{
+@DynamicUpdate
+public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	
+
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
-	
+
 	@NotBlank(message = "E-mail é obrigatório")
 	@Email(message = "E-mail inválido")
 	private String email;
-	
+
 	private String senha;
 	
 	@Transient
 	private String confirmacaoSenha;
-	
+
 	private Boolean ativo;
-	
-	@Size(min=1, message = "Selecione ao menos um grupo")
+
+	@Size(min = 1, message = "Selecione pelo menos um grupo")
 	@ManyToMany
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario"),
-				inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario")
+				, inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
 	private List<Grupo> grupos;
-	
+
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
+	@PreUpdate
+	private void preUpdate() {
+		this.confirmacaoSenha = senha;
+	}
 	
-	//Getters and Setters
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -92,20 +96,20 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-	public String getConfirmacaoSenha() {
-		return confirmacaoSenha;
-	}
-
-	public void setConfirmacaoSenha(String confirmacaoSenha) {
-		this.confirmacaoSenha = confirmacaoSenha;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public List<Grupo> getGrupos() {
@@ -116,23 +120,24 @@ public class Usuario implements Serializable{
 		this.grupos = grupos;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 	
-	/*Método da classe para a senha*/
 	public boolean isNovo() {
 		return codigo == null;
 	}
 
-	//Equals and HashCode
 	@Override
 	public int hashCode() {
-		return Objects.hash(ativo, codigo, confirmacaoSenha, dataNascimento, email, grupos, nome, senha);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
 	}
 
 	@Override
@@ -144,13 +149,12 @@ public class Usuario implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return Objects.equals(ativo, other.ativo) && Objects.equals(codigo, other.codigo)
-				&& Objects.equals(confirmacaoSenha, other.confirmacaoSenha)
-				&& Objects.equals(dataNascimento, other.dataNascimento) && Objects.equals(email, other.email)
-				&& Objects.equals(grupos, other.grupos) && Objects.equals(nome, other.nome)
-				&& Objects.equals(senha, other.senha);
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
-	
-	
-		
+
 }
