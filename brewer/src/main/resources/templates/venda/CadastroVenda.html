@@ -7,6 +7,9 @@
 
 <head>
 	<title>Cadastro de venda</title>
+	
+	<link rel="stylesheet" th:href="@{/stylesheets/vendors/easy-autocomplete.min.css}"/>
+	<link rel="stylesheet" th:href="@{/stylesheets/vendors/easy-autocomplete.themes.min.css}"/>
 </head>
 
 <section layout:fragment="conteudo">
@@ -63,7 +66,7 @@
 					<label class="control-label" for="nomeCliente">Cliente</label>
 					<div class="input-group">
 				      <input id="nomeCliente" type="text" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o cliente"/>
-					  <input id="codigoCliente" type="hidden"/>
+				      <input id="codigoCliente" type="hidden"/>
 				      <span class="input-group-btn">
 				        <button class="btn  btn-default  js-tooltip" type="button" title="Pesquisa avançada"
 				        		data-toggle="modal" data-target="#pesquisaRapidaClientes" >
@@ -71,8 +74,6 @@
 				        </button>
 				      </span>
 				    </div>
-				    
-				    
 				</div>
 				
 				<div class="form-group  col-sm-4 bw-required">
@@ -106,7 +107,7 @@
 
 					<div class="row">
 						<div class="form-group  col-lg-12">
-							<input type="text" class="form-control" id="cerveja" 
+							<input type="text" class="form-control  js-sku-nome-cerveja-input" id="cerveja" 
 								placeholder="Pesquise e adicione a cerveja pelo SKU ou nome" autofocus="autofocus" />
 						</div>
 					</div>
@@ -162,19 +163,21 @@
 	</div>
 	
 	<th:block th:replace="cliente/PesquisaRapidaClientes :: pesquisaRapidaClientes"></th:block>
-	
+	<th:block th:replace="hbs/TemplateAutocompleteCerveja"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/vendors/jquery.easy-autocomplete.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
 	<script th:src="@{/javascripts/cliente.pesquisa-rapida.js}"></script>
+	<script th:src="@{/javascripts/venda.autocomplete-itens.js}"></script>
 	<script>
-		$(function() {
-			$('.js-abas-venda a').click(function (e) {
-				e.preventDefault();
-				$(this).tab('show');
-			});
+	$(function() {
+		$('.js-abas-venda a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
 		});
+	});
 	</script>
 </th:block>
 
