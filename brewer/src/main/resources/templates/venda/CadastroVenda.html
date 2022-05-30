@@ -3,7 +3,8 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/LayoutPadrao}"
-	xmlns:brewer="http://brewer.algaworks.com">
+	xmlns:brewer="http://brewer.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <head>
 	<title>Cadastro de venda</title>
@@ -108,7 +109,8 @@
 					<div class="row">
 						<div class="form-group  col-lg-12">
 							<input type="text" class="form-control  js-sku-nome-cerveja-input" id="cerveja" 
-								placeholder="Pesquise e adicione a cerveja pelo SKU ou nome" autofocus="autofocus" />
+								placeholder="Pesquise e adicione a cerveja pelo SKU ou nome" autofocus="autofocus" 
+								data:url="@{/cervejas}"/>
 						</div>
 					</div>
 					<!-- O item js abaixo concatena um código html -->

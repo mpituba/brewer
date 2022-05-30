@@ -1,7 +1,7 @@
 package com.algaworks.brewer.model;
 
 import java.math.BigDecimal;
-import java.util.Objects;
+
 
 public class ItemVenda {
 	
@@ -9,6 +9,7 @@ public class ItemVenda {
 	private Integer quantidade;
 	private BigDecimal valorUnitario;
 	private Cerveja cerveja;
+	
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -42,8 +43,12 @@ public class ItemVenda {
 	/* Hashcode and Equals */
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,8 +58,12 @@ public class ItemVenda {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemVenda other = (ItemVenda) obj;
-		return Objects.equals(codigo, other.codigo);
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
-	
 	
 }
